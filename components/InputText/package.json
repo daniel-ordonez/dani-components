@@ -1,7 +1,8 @@
 {
-  "name": "@dani-components/input-text",
+  "name": "@daniel-ordonez/do-input-text",
   "version": "0.0.1-alpha.0",
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "gitHead": "8e706efd28b8f698b5973051efaeccd40f2d48de"
 }
