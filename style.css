@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css?family=Rubik');
+
+:root {
+
+    --color-primary: #2d53fe;
+    --color-primary--shade-1: #294be5;
+    --color-primary--shade-2: #1f3ab2;
+    --color-primary--shade-3: #172a7f;
+    --color-primary--light-1: #4264fe;
+    --color-primary--light-2: #6c87fe;
+    --color-primary--light-3: #96a9ff;
+    --color-primary--contrast: white;
+    --color-primary--light-2--contrast: #333;
+
+    --color-bg: white;
+    --color-bg--shade-0: #fbfbfb;
+    --color-bg--shade-1: #F3F4F7;
+    --color-bg--shade-2: #dbdcde;
+    --color-bg--shade-3: #c2c3c6;
+    --color-bg--contrast: #333;
+    --color-dark-1: #181819;
+    --color-dark-2: #313131;
+    --color-dark-3: #49494a;
+    --color--action--danger: #F7444E;
+    --stroke: #333;
+
+    --color-text: var(--color-bg--contrast);
+    font-family: Rubik;
+    font-size: 13px;
+
+    --padding-xs: .309em;
+    --padding-s: .618em;
+    --padding-m: 1em;
+    --padding-l: 1.618em;
+
+    --transparency-0: 1;
+    --transparency-1: .8;
+    --transparency-2: .5;
+    --transparency-3: .3;
+
+    --card--border-radius: .618rem;
+}
+body {
+    padding: 0;
+    margin: 0;
+}
+*{
+    box-sizing: border-box;
+}
+.no-break {
+    white-space: nowrap;
+}
+img.responsive {
+    width: 100%;
+    height: auto;
+    margin:auto;
+}
+
+@import './style/button.css';
+@import './style/input.css';

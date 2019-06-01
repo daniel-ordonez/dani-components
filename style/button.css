@@ -1,0 +1,78 @@
+/*
+*
+*   BUTTON
+*
+*/
+button {
+    --button--text-color: var(--color-bg--contrast, inherit);
+    --stroke: var(--button--tex-color);
+    --button--padding: 8px;
+    --button--bg: var(--color-bg);
+    --button--hover--bg: var(--color-bg--shade-2);
+    --button--active--bg: var(--color-bg--shade-3);
+
+    cursor: pointer;
+    font-size: inherit;
+    font-family: inherit;
+    border-radius: var(--button--border-radius);
+    position: relative;
+    background: transparent;
+    color: var(--button--text-color);
+    z-index: 1;
+    
+    border: none;
+    outline: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/*
+button:focus {
+    outline: var(--color-primary, black);
+    outline-width: 2px;
+    outline-style: solid;
+}
+*/
+button.btn {
+    background-position: center;
+    transition: background 0.5s;
+    padding: var(--button--padding);
+    white-space: nowrap;
+}
+button.btn:hover, button.btn:focus {
+    background: var(--button--hover--bg) radial-gradient(circle, transparent 1%, var(--button--hover--bg) 1%) center/15000%;
+}
+button.btn:active {
+    background-color: var(--button--active--bg);
+    background-size: 100%;
+    transition: background 0s;
+}
+
+
+/*
+For buttons with icon following text
+*/
+button>*:not(:first-child) {
+    margin-left: var(--padding-xs);
+}
+/* ICON BUTTON */
+button.btn--icon {
+    height: var(--button-radius, 2em);
+    width: var(--button-radius, 2em);
+    --button--border-radius: 50%;
+}
+/* DISABLED BUTTON */
+button:disabled {
+    cursor: initial;
+    color: var(--color-bg--shade-2);
+}
+button:disabled svg {
+    stroke: var(--color-bg--shade-2);
+}
+/* FLOATING ACTION BUTTON */
+button.fab-btn {
+    height: var(--button-radius, 4rem);
+    width: var(--button-radius, 4rem);
+    --button--border-radius: 50%;
+}

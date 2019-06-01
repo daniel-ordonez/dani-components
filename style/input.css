@@ -1,0 +1,102 @@
+.input-text {
+    --input--padding: var(--padding-s);
+    --input--border-radius: 0;
+    --input--border-size: 1px;
+    --input--border-color: var(--color-bg);
+    --input--bg-color: var(--color-bg--shade-1);
+    --input--text-color: var(--color-bg--contrast);
+    --input--focus--border-color: var(--color-primary);
+    --input--focus--bg-color: var(--color-bg);
+    --input--focus--text-color: var(--color-bg--contrast);
+    --input--focus--label--text-color: var(--color-primary);
+}
+
+input[type="text"], input[type="number"] {
+    line-height: 1;
+    box-sizing: border-box;
+    margin: 0;
+    outline: none;
+    width: 100%;
+    padding: var(--input--padding);
+    background: inherit;
+    color: inherit;
+    border: none;
+    border-radius: var(--input--border-radius);
+    text-align: inherit;
+    font-size: inherit
+}
+
+.input-text.input-text--focused {
+    --input--bg-color: var(--input--focus--bg-color);
+    --input--text-color: var(--input--focus--text-color);
+    --input--border-color: var(--input--focus--border-color);
+}
+
+.input-text__label {
+    padding-bottom: var(--padding-xs);
+    color: var(--input--text-color);
+}
+
+.input-text--focused .input-text__label {
+    color: var(--input--focus--label--text-color);
+}
+
+.input-text__wrapper {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    border-color: var(--input--border-color);
+    border-style: solid;
+    border-width: var(--input--border-size);
+    border-radius: var(--input--border-radius);
+    background: var(--input--bg-color);
+    color: var(--input--text-color);
+    border: var(--input--border-size) solid var(--input--border-color);
+}
+
+.input-text__prepend {
+    padding-left: var(--input--padding);
+    display: flex;
+    align-items: center;
+}
+.input-text__prepend+input {
+    padding-left: var(--padding-xs);
+}
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+.input-text input[type="text"]:-internal-autofill-selected {
+    color: var(--input--text-color);
+    background: var(--input-text--background-color);
+}
+.input-text input[type="text"]::placeholder, .input-text input[type="number"]::placeholder {
+    color: var(--input--text-color);
+    opacity: 0.5;
+}
+.input-text__clear {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding-right: var(--padding-xs);
+    --button-radius: 2em;
+}
+
+.input-text__suggests {
+    position: absolute;
+    left: calc(-1 * var(--input--border-size, 0));
+    right: calc(-1 * var(--input--border-size, 0));
+    top: 100%;
+    max-height: 200px;
+    background: var(--color-bg);
+    overflow-y: auto;
+    z-index: 100;
+    border: var(--input--border-size) solid var(--input--border-color);
+}
+
+.input-text--select {
+    cursor: initial;
+}
