@@ -1,6 +1,6 @@
 <template>
-    <div class="input-text">
-        <div v-if="label.length" class="input-text__label">
+    <div class="input-text" :class="{'input-text--focused': focused}">
+        <div v-if="label && label.length" class="input-text__label">
             <label :for="inputId">{{label}}</label>
         </div>
         <div class="input-text__wrapper">
@@ -9,6 +9,7 @@
             </div>
 
             <input 
+                tabindex="0"
                 :id="inputId"
                 v-model="inputValue"
                 v-bind="$attrs"
@@ -22,11 +23,25 @@
             </div>
             
             <div v-if="clear" class="input-text__clear">
-                <button v-if="inputValue" class="btn--icon" @click="inputValue = null">
-                    x
+                <button tabindex="0" v-if="inputValue" class="btn btn--icon" @click="inputValue = null">
+                    <span style="line-height: 0;">x</span>
                 </button>
             </div>
 
         </div>
     </div>
 </template>
+
+<script>
+import InputTextBase from '@daniel-ordonez/do-input-text-base/InputTextBase'
+export default {
+    name: 'input-text',
+    extends: InputTextBase,
+    computed: {
+        inputValue: {
+            get () { return this.value ? this.value : this.content },
+            set (value) { this.$emit('input', value); this.content = value }
+        }
+    }
+}
+</script>
