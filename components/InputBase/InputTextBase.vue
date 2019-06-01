@@ -36,7 +36,7 @@ export default {
         },
         reset () {
             this.content = ''
-            this.$emit('input', '')
+            this.$emit('input', null)
             this.state = INPUT_STATE.INITIAL
         }
 

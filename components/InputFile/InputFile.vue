@@ -1,6 +1,9 @@
 <template>
     <div class="input-file">
         <div class="input-file__area">
+            <div role="icon">
+                <i class='uil uil-upload'></i>
+            </div>
             <div role="placeholder">
             {{uploadText}}
             </div>
@@ -17,6 +20,7 @@
 
 <script>
 import InputFilePreviewCard from './InputFilePreviewCard'
+
 export default {
     name: 'input-file',
     components: {InputFilePreviewCard},
@@ -49,7 +53,7 @@ export default {
         handleFiles (event) {
             const files = event.target.files
             if (this.files.length && !files.length) return
-            this.files = [...this.files, ...files]
+            this.files = this.multiple ? [...this.files, ...files] : files
         },
         removeFile(i) {
             let copy = [...this.files]
@@ -73,9 +77,13 @@ export default {
     align-items: flex-start;
     cursor: pointer;
     padding: var(--padding-m);
-}
-.input-file__area>[role="placeholder"] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     opacity: var(--transparency-1);
+}
+.input-file__area>[role="icon"] {
+    font-size: 2em;
 }
 .input-file__preview {
     display: grid;

@@ -62,6 +62,12 @@ button.btn--icon {
     width: var(--button-radius, 2em);
     --button--border-radius: 50%;
 }
+.btn--icon>i{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 /* DISABLED BUTTON */
 button:disabled {
     cursor: initial;

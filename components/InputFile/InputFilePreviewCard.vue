@@ -6,7 +6,7 @@
                 <div class="fpc-header__size">{{subtitle | formatBytes}}</div>
             </div>
             <button class="btn btn--icon" @click="$emit('remove')">
-                <span style="line-height: 0;">x</span>
+                <i class='uil uil-times'></i>
             </button>
         </div>
         <div class="file-preview-card__content">

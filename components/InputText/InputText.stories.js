@@ -2,7 +2,7 @@ import { storiesOf } from '@storybook/vue'
 import InputText from './InputText'
 
 storiesOf('InputText', module)
-  .add('normal', () => ({
+  .add('default', () => ({
     components: { InputText },
     template:
     `
