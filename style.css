@@ -39,6 +39,14 @@
     --transparency-3: .3;
 
     --card--border-radius: .618rem;
+
+
+    --button--text-color: var(--color-bg--contrast, inherit);
+    --stroke: var(--button--tex-color);
+    --button--padding: 8px;
+    --button--bg: var(--color-bg);
+    --button--hover--bg: var(--color-bg--shade-2);
+    --button--active--bg: var(--color-bg--shade-3);
 }
 body {
     padding: 0;
@@ -58,3 +66,4 @@ img.responsive {
 
 @import './style/button.css';
 @import './style/input.css';
+@import './style/transitions.css';

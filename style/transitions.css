@@ -1,0 +1,67 @@
+
+[transition-direction="left"] {
+    --transition-direction: 1;
+}
+[transition-direction="right"] {
+    --transition-direction: -1;
+}
+[transition-direction="up"]{
+    --transition-direction: 1;
+}
+[transition-direction="down"]{
+    --transition-direction: -1;
+}
+
+
+
+.slide-x-enter-active {
+transition: transform var(--trans-dur, .6s) ease-in-out, opacity var(--fade-dur, .4s) ease-in;
+will-change: opacity, transform;
+opacity: .5;
+transform: translateX(0);
+}
+.slide-x-enter {
+transform: translateX(calc( 100% * var(--transition-direction, 1) ));
+opacity: 0;
+will-change: opacity, transform;
+}
+
+
+.slide-x-leave-active {
+transform: translateX(0);
+position: absolute !important;
+transition: transform var(--trans-dur, .6s) ease-in-out, opacity var(--fade-dur, .4s) ease-out;
+will-change: opacity, transform;
+opacity: 1;
+}
+.slide-x-leave-to {
+transform: translateX(calc( -100% * var(--transition-direction, 1) ));
+position: absolute !important;
+opacity: 0;
+}
+
+
+.drop-enter-active {
+    transition: transform var(--trans-dur, .6s) ease-in-out, opacity var(--fade-dur, .4s) ease-in;
+    will-change: opacity, transform;
+    opacity: .5;
+    transform: translateY(0);
+}
+.drop-enter {
+    transform: translateY(calc( -100% * var(--transition-direction, 1) ));
+    opacity: 0;
+    will-change: opacity, transform;
+}
+.drop-leave-active {
+    transform: translateY(0);
+    position: absolute !important;
+    transition: transform var(--trans-dur, .6s) ease-in-out, opacity var(--fade-dur, .4s) ease-out;
+    will-change: opacity, transform;
+    opacity: 1;
+}
+.drop-leave-to {
+    transform: translateY(calc( 100% * var(--transition-direction, 1) ));
+    position: absolute !important;
+    opacity: 0;
+}
+  

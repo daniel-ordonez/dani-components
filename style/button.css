@@ -27,28 +27,20 @@ button {
     align-items: center;
     justify-content: center;
 }
-/*
-button:focus {
-    outline: var(--color-primary, black);
-    outline-width: 2px;
-    outline-style: solid;
-}
-*/
 button.btn {
     background-position: center;
     transition: background 0.5s;
     padding: var(--button--padding);
     white-space: nowrap;
 }
-button.btn:hover, button.btn:focus {
+button.btn:hover:not(:disabled) {
     background: var(--button--hover--bg) radial-gradient(circle, transparent 1%, var(--button--hover--bg) 1%) center/15000%;
 }
-button.btn:active {
+button.btn:active:not(:disabled) {
     background-color: var(--button--active--bg);
     background-size: 100%;
     transition: background 0s;
 }
-
 
 /*
 For buttons with icon following text
@@ -62,7 +54,7 @@ button.btn--icon {
     width: var(--button-radius, 2em);
     --button--border-radius: 50%;
 }
-.btn--icon>i{
+.btn--icon>i, .btn--icon>span{
     position: absolute;
     top: 50%;
     left: 50%;
