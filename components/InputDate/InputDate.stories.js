@@ -39,7 +39,7 @@ storiesOf('InputDate', module)
   }))
   .add('Input Date', () => ({
     components: { InputDate },
-    template: `<input-date @input="onInput" style="${style}" />`,
+    template: `<input-date clear @input="onInput" style="${style}" />`,
     data: () => ({}),
     methods: InputMethods
   }))

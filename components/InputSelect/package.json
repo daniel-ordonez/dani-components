@@ -1,0 +1,11 @@
+{
+    "name": "@daniel-ordonez/do-input-select",
+    "version": "0.0.0",
+    "publishConfig": {
+        "access": "public"
+    },
+    "dependencies": {
+        "@daniel-ordonez/do-input-text-base": "^0.1.2",
+        "lodash.throttle": "^4.1.1"
+    }
+}
