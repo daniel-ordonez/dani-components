@@ -1,6 +1,5 @@
 import { storiesOf } from '@storybook/vue'
 import { action } from '@storybook/addon-actions'
-
 import InputSelect from './InputSelect'
 
 const style = 'max-width:400px'
@@ -19,7 +18,7 @@ const items = [
 ]
 
 storiesOf('InputSelect', module)
-  .add('days', () => ({
+  .add('list of text', () => ({
     components: { InputSelect },
     template: `<input-select 
     label="Day of the week" 

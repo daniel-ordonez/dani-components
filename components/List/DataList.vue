@@ -8,6 +8,7 @@
 import List from './List'
 export default {
     components: {List},
+    name: 'data-list',
     data: ()  => ({
         items: [],
         index: 0,

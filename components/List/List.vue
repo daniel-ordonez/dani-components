@@ -4,6 +4,13 @@
     </div>
 </template>
 
+<script>
+export default {
+    name: 'list'
+}
+</script>
+
+
 <style>
 .list {
     display: flex;

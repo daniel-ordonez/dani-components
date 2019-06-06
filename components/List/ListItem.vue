@@ -9,6 +9,7 @@
 
 <script>
 export default {
+    name: 'list-item',
     data: () => ({
         selected: false
     }),

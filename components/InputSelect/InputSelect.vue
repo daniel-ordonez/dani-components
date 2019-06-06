@@ -28,7 +28,7 @@
                 </button>
             </div>
 
-            <div class="input-text__datalist" v-if="datalist && suggestions.length">
+            <div class="input-text__datalist" v-if="dataList && suggestions.length">
                 <data-list ref="dataList">
                     <list-item v-for="(option, index) in suggestions" 
                         :key="`item-${index}-${option}`" 
@@ -43,13 +43,13 @@
 </template>
 
 <script>
-import throttle from 'lodash.throttle'
+import throttle from 'lodash/throttle'
 import InputTextBase from '@daniel-ordonez/do-input-text-base/InputTextBase'
-import DataList from '@daniel-ordonez/list/DataList'
-import ListItem from '@daniel-ordonez/list/ListItem'
+import DataList from '@daniel-ordonez/do-list/DataList'
+import ListItem from '@daniel-ordonez/do-list/ListItem'
 
 export default {
-    name: 'input-text',
+    name: 'input-select',
     extends: InputTextBase,
     components: {DataList, ListItem},
     data: () => ({
@@ -81,7 +81,7 @@ export default {
     },
     mounted () {
         document.body.addEventListener('click', event => {
-            let closest = event.target.closest(`#${this.id}`)
+            let closest = event.target.closest(`#${this.inputId}`)
             if (!closest) this.dataList = false
         })
         this.fSuggestions = throttle((filter, items, cb) => {
@@ -99,7 +99,7 @@ export default {
             this.dataList = true
         },
         selectValue (value) {
-            this.text = value
+            this.inputValue = value
             this.dataList = false
         },
         keymonitor (keyEvent) {
@@ -128,3 +128,18 @@ export default {
     }
 }
 </script>
+
+<style>
+.input-text__datalist {
+    position: absolute;
+    left: calc(-1 * var(--input--border-size, 0));
+    right: calc(-1 * var(--input--border-size, 0));
+    top: 100%;
+    max-height: 200px;
+    background: var(--color-bg);
+    overflow-y: auto;
+    z-index: 100;
+    border: var(--input--border-size) solid var(--input--border-color);
+}
+
+</style>

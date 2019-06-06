@@ -6,6 +6,6 @@
     },
     "dependencies": {
         "@daniel-ordonez/do-input-text-base": "^0.1.2",
-        "lodash.throttle": "^4.1.1"
+        "@daniel-ordonez/do-list": "^0.0.0"
     }
 }
