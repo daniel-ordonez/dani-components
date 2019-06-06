@@ -1,11 +1,11 @@
 {
     "name": "@daniel-ordonez/do-input-select",
-    "version": "0.1.0-alpha.0",
+    "version": "0.1.0",
     "publishConfig": {
         "access": "public"
     },
     "dependencies": {
         "@daniel-ordonez/do-input-text-base": "^0.1.2",
-        "@daniel-ordonez/do-list": "^0.0.0"
+        "@daniel-ordonez/do-list": "^0.1.0"
     }
 }
