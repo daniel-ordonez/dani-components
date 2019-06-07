@@ -79,6 +79,6 @@ img.responsive {
     margin:auto;
 }
 
-@import './style/button.css';
-@import './style/input.css';
-@import './style/transitions.css';
+@import './css/button.css';
+@import './css/input.css';
+@import './css/transitions.css';
