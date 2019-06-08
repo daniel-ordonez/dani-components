@@ -4,7 +4,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "8e706efd28b8f698b5973051efaeccd40f2d48de",
+  "gitHead": "2815efbf0af0a9e698a1d634f48eb6099cbf37b1",
   "dependencies": {
     "@daniel-ordonez/do-input-text-base": "^0.1.2"
   }
