@@ -4,7 +4,7 @@
             <label :for="inputId">{{label}}</label>
         </div>
         <div class="input-text__wrapper">
-            <div v-if="prepend" class="inpute-text__prepend">
+            <div v-if="prepend" class="input-text__prepend">
                 <slot name="prepend"/>
             </div>
 
@@ -19,7 +19,7 @@
                 @focus="focus"
                 @blur="blur">
             
-            <div v-if="append" class="inpute-text__append">
+            <div v-if="append" class="input-text__append">
                 <slot name="append"/>
             </div>
             
@@ -39,8 +39,15 @@ export default {
     name: 'input-text',
     extends: InputTextBase,
     props: {
+        value: {
+            type: [String, Number, Object],
+            validator: v => typeof v === 'object' ? v === null : true 
+        },
         mobile: { type: Boolean, default: false },
-        int: { type: Boolean, default: false }
+        int: { type: Boolean, default: false },
+        decimals: {
+            type: Number, default: 10
+        }
     },
     watch: {
         value (value) {
@@ -51,7 +58,8 @@ export default {
         inputValue: {
             get () { return this.value && !isNaN(this.value) ? this.value : this.content },
             set (value) {
-                let n = value ? this.int ? parseInt(value) : parseFloat(value) : value
+                if (!(this.content || '').length && value === '.') value = '0.'
+                let n = value ? this.int ? parseInt(value) : value : value
                 this.$emit('input', n); this.content = n
             }
         }
@@ -60,11 +68,16 @@ export default {
         checkInput (keyboardEvent) {
             const key = keyboardEvent.key
             if (!key) return
+            let str = this.content ? this.content.toString() : ''
+            let i = str.indexOf('.')
+            let isfloat = i !== -1
             if (key === '.' && !this.int) {
-                if (this.content.toString().includes('.')) return keyboardEvent.preventDefault()
+                if (isfloat) return keyboardEvent.preventDefault()
                 else return
             }
             if ((isNaN(key) && key.length === 1) || key === " ") return keyboardEvent.preventDefault()
+            let l = str.length
+            if (isfloat && l - i > this.decimals) return keyboardEvent.preventDefault()
         }
     }
 }

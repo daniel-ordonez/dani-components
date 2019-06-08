@@ -25,6 +25,7 @@ storiesOf('DataTable', module)
   .add('Weekdays', () => ({
     components: { DataTable, DtTh },
     template: `
+    <div style="max-width: 400px;">
     <data-table style="${style}">
       <thead>
         <th>#</th>
@@ -36,7 +37,8 @@ storiesOf('DataTable', module)
           <td>{{item.name}}</td>
         </tr>
       </tbody>
-    </data-table>`,
+    </data-table>
+    </div>`,
     data: () => ({
       items: daysOfWeek,
       sortFunction,

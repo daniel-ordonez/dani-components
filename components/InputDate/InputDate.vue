@@ -4,7 +4,7 @@
             <label :for="inputId">{{label}}</label>
         </div>
         <div class="input-text__wrapper">
-            <div v-if="prepend" class="inpute-text__prepend">
+            <div v-if="prepend" class="input-text__prepend">
                 <slot name="prepend"/>
             </div>
 
@@ -18,7 +18,7 @@
                 @focus="focus"
                 @blur="blur">
             
-            <div v-if="append" class="inpute-text__append">
+            <div v-if="append" class="input-text__append">
                 <slot name="append"/>
             </div>
             
