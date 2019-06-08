@@ -15,7 +15,7 @@ table.data-table {
     display: grid;
     border-collapse: collapse;
     min-width: 100%;
-    grid-template-columns: repeat(var(--table-cells, 1), minmax(var(--min-col-width, 50px), 1fr));
+    grid-template-columns: repeat(var(--table-cols, 1), minmax(var(--min-col-width, 50px), 1fr));
 }
 .data-table thead,
 .data-table tbody,

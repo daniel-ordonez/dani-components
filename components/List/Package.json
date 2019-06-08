@@ -1,8 +1,8 @@
 {
     "name": "@daniel-ordonez/do-list",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "publishConfig": {
         "access": "public"
     },
-    "gitHead": "7879262a7123dedc80fe5348d3127eb57ba0c270"
+    "gitHead": "b018e10feaad47b74de87bf5cac8b4e05f18ddb6"
 }
