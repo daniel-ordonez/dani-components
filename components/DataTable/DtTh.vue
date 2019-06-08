@@ -1,5 +1,5 @@
 <template>
-    <th :sortable="!!sortable" >
+    <th :sortable="!!sort" >
         <slot/>
         <span v-if="sortable" class="sort-icon">
             <i class='uil uil-sort'></i>
@@ -10,7 +10,7 @@
 <script>
 export default {
     props: {
-        sortable: { type: Boolean, default: false }
+        sort: { type: Boolean, default: false }
     },
     mounted () {
         this.$el.addEventListener('click', event => {

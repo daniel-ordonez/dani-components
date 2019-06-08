@@ -40,15 +40,6 @@ table.data-table {
   width: 3px;
   cursor: col-resize;
 }
-.resize-handle:hover,
-/* The following selector is needed so the handle is visible during resize even if the mouse isn't over the handle anymore */
-.header--being-resized .resize-handle {
-  opacity: 0.5;
-}
-
-th:hover .resize-handle {
-  opacity: 0.3;
-}
 
 th {
   position: sticky;
