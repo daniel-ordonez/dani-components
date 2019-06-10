@@ -1,6 +1,6 @@
 {
     "name": "@daniel-ordonez/do-input-file",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "publishConfig": {
         "access": "public"
     }
