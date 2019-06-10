@@ -4,7 +4,7 @@ import InputFile from './InputFile'
 
 const containerStyle = `
 max-width: 400px;
-height: 100%;
+height: 400px;
 max-height: 400px;
 `
 

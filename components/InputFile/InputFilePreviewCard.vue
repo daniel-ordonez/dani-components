@@ -75,6 +75,7 @@ export default {
     background: var(--color-bg);
     position: relative;
     z-index: 1;
+    margin-bottom: auto;
 }
 .file-preview-card::before {
     content: "";
