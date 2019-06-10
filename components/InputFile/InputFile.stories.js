@@ -1,15 +1,20 @@
 import { storiesOf } from '@storybook/vue'
 import InputFile from './InputFile'
-import InputFilePreviewCard from './InputFilePreviewCard'
 
 
+const containerStyle = `
+max-width: 400px;
+height: 100%;
+max-height: 400px;
+`
 
 storiesOf('InputFile', module)
   .add('simple', () => ({
     components: { InputFile },
     template:
-    `
-      <input-file/>
+    `<div style="${containerStyle}">
+      <input-file label="File"/>
+    </div>
     `,
     data: () => ({
     })
@@ -17,8 +22,11 @@ storiesOf('InputFile', module)
   .add('multiple', () => ({
     components: { InputFile },
     template:
-    `
-      <input-file multiple/>
+    `<div style="${containerStyle}">
+      <input-file 
+        multiple
+        label="Files"/>
+    </div>
     `,
     data: () => ({
     })

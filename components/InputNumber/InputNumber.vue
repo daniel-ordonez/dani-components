@@ -77,7 +77,7 @@ export default {
             }
             if ((isNaN(key) && key.length === 1) || key === " ") return keyboardEvent.preventDefault()
             let l = str.length
-            if (isfloat && l - i > this.decimals) return keyboardEvent.preventDefault()
+            if (isfloat && l - i > this.decimals && key.length === 1) return keyboardEvent.preventDefault()
         }
     }
 }

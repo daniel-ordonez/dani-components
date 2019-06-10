@@ -6,5 +6,6 @@
     },
     "dependencies": {
         "@daniel-ordonez/do-input-text-base": "^0.1.2"
-    }
+    },
+    "gitHead": "a16d39e428b0f3bf3ba4e3810285b0b9a76904c5"
 }

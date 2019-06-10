@@ -1,19 +1,24 @@
 <template>
     <div class="input-file">
-        <div class="input-file__area">
-            <div role="icon">
-                <i class='uil uil-upload'></i>
-            </div>
-            <div role="placeholder">
-            {{uploadText}}
-            </div>
+        <div v-if="label && label.length" class="input-text__label">
+            <label :for="inputId">{{label}}</label>
         </div>
-        <input @change="handleFiles" :id="inputId" :multiple="multiple" type="file" style="display: none;">
-        <div class="input-file__preview">
-            <input-file-preview-card v-for="(file, index) in files"
-                :file="file"
-                :key="index"
-                @remove="removeFile(index)"/>
+        <div class="input-file__wrapper">
+            <div class="input-file__area">
+                <div role="icon">
+                    <i class='uil uil-upload'></i>
+                </div>
+                <div role="placeholder">
+                {{uploadText}}
+                </div>
+            </div>
+            <input @change="handleFiles" :id="inputId" :multiple="multiple" type="file" style="display: none;">
+            <div class="input-file__preview">
+                <input-file-preview-card v-for="(file, index) in files"
+                    :file="file"
+                    :key="index"
+                    @remove="removeFile(index)"/>
+            </div>
         </div>
     </div>
 </template>
@@ -65,11 +70,12 @@ export default {
 </script>
 
 <style>
-.input-file {
+.input-file__wrapper {
     display: flex;
     flex-direction: column;
     width: 100%;
     background: var(--color-bg--shade-1);
+    padding-bottom: var(--padding-m);
 }
 .input-file__area {
     display: flex;
@@ -90,8 +96,17 @@ export default {
     grid-template-columns: 1fr;
     grid-row-gap: var(--padding-m);
     padding: 0 var(--padding-m);
+    max-height: 360px;  
+    overflow-y: auto;
 }
+.input-file__preview::-webkit-scrollbar {
+    display: none;
+    opacity: 0;
+    max-width: 0;
+}
+/*
 .input-file__preview>*:last-child {
     margin-bottom: var(--padding-m);
 }
+*/
 </style>
