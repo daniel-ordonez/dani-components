@@ -53,12 +53,10 @@ export default {
         let wrapper = this.$el.querySelector('.input-file__wrapper')
         wrapper.addEventListener('focusin', event => {
             this.focused = true
-            console.log('focus')
             return event
         }, true)
         wrapper.addEventListener('focusout', event => {
             this.focused = false
-            console.log('blur')
             return event
         }, true)
     },

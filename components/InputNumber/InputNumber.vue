@@ -59,7 +59,13 @@ export default {
             get () { return this.value && !isNaN(this.value) ? this.value : this.content },
             set (value) {
                 if (!(this.content || '').length && value === '.') value = '0.'
-                let n = value ? this.int ? parseInt(value) : value : value
+                let n = value 
+                ? this.int 
+                    ? parseInt(value) 
+                    : isNaN(parseFloat(value))
+                        ? value
+                        : parseFloat(value) 
+                : null
                 this.$emit('input', n); this.content = n
             }
         }
