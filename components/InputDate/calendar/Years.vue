@@ -100,7 +100,7 @@ export default {
     padding: 0.3em;
 }
 .year-slot__btn--disabled {
-    opacity: 0.5;
+    opacity: var(--transparency-2, 0.5);
     padding: var(--button--padding);
 }
 .year-slot__btn {

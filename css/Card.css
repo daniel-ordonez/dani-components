@@ -1,0 +1,59 @@
+/*
+*
+* CARD
+*
+*/
+.card {
+    background: var(--color-bg);
+    border-radius: var(--card--border-radius);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+}
+
+.card__title {
+    padding: var(--padding-rm) var(--padding-rl);
+    border-bottom: 1px solid var(--color-bg--shade-2, rgba(0,0,0,0.08));
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+}
+.card__title>*:not(:first-child) {
+    margin-left: var(--padding-rm);
+}
+
+
+.card__body {
+    padding: var(--padding-l);
+    height: 100%;
+}
+.card>.card__body:first-child {
+    padding-top: var(--padding-xl);
+}
+.card__actions {
+    padding: var(--padding-rl) var(--padding-rl);
+    display: flex;
+    justify-content: flex-end;
+    margin-top: auto;
+}
+.card__actions>button {
+    min-width: 120px;
+}
+.card__actions>button:not(:first-child) {
+    margin-left: var(--padding-s);
+}
+
+.card--modal {
+    max-height: 100vh;
+    max-width: 100vw;
+}
+.card--modal .card__title {
+    position: sticky;
+    top: 0;
+}
+.card--modal .card__body {
+    overflow-y: auto;
+}
+

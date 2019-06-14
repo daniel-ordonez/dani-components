@@ -3,7 +3,7 @@
         <div class="file-preview-card__header">
             <div class="fpc-info">
                 <div class="fpc-info__name">{{title}}</div>
-                <div class="fpc-header__size">{{subtitle | formatBytes}}</div>
+                <div v-if="sub" class="fpc-header__size">{{subtitle | formatBytes}}</div>
             </div>
             <button class="btn btn--icon" @click="$emit('remove')">
                 <i class='uil uil-times'></i>
@@ -27,10 +27,8 @@ export default {
         },
     },
     props: {
-        file: {
-            type: File,
-            default: () => ({})
-        }
+        file: { type: File, default: () => ({}) },
+        sub: { type: Boolean, default: true }
     },
     data: () => ({
         imgSrc: null

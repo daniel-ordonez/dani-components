@@ -53,7 +53,9 @@ button.btn--icon {
     height: var(--button-radius, 2em);
     width: var(--button-radius, 2em);
     --button--border-radius: 50%;
+    cursor: pointer;
 }
+
 .btn--icon>i, .btn--icon>span{
     position: absolute;
     top: 50%;
@@ -69,8 +71,33 @@ button:disabled svg {
     stroke: var(--color-bg--shade-2);
 }
 /* FLOATING ACTION BUTTON */
-button.fab-btn {
+button.btn--fab {
+    --button-radius: 4rem;
+    font-size: 2rem;
     height: var(--button-radius, 4rem);
     width: var(--button-radius, 4rem);
     --button--border-radius: 50%;
+    position: relative;
+    --button-bg: var(--color-primary);
+    --button--hover--bg: var(--color-primary--light-1);
+    --button--active--bg: var(--color-primary--light-2);
+    background: var(--button-bg);
+    --button--text-color: var(--color-primary--contrast);
+}
+.btn--fab::before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    mix-blend-mode: lighten;
+    border-radius: var(--button--border-radius);
+}
+/* BUTTON PRIMARY */
+.btn--primary {
+    --button--text-color: var(--color-primary--contrast, inherit);
+    --button--bg: var(--color-primary);
+    --button--hover--bg: var(--color-primary--shade-2);
+    --button--active--bg: var(--color-primary--shade-3);
+    background: var(--button--bg);
 }

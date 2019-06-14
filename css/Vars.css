@@ -1,0 +1,61 @@
+:root {
+
+    --color-primary: #2d53fe;
+    --color-primary--shade-1: #294be5;
+    --color-primary--shade-2: #1f3ab2;
+    --color-primary--shade-3: #172a7f;
+    --color-primary--light-1: #4264fe;
+    --color-primary--light-2: #6c87fe;
+    --color-primary--light-3: #96a9ff;
+    --color-primary--contrast: white;
+    --color-primary--light-2--contrast: #333;
+
+    --color-bg: white;
+    --color-bg--light: #fcfcfc;
+    --color-bg--shade-0: #F3F4F7;
+    --color-bg--shade-1: #dbdcde;
+    --color-bg--shade-2: #c2c3c6;
+    --color-bg--contrast: #333;
+    --color-dark-1: #181819;
+    --color-dark-2: #313131;
+    --color-dark-3: #49494a;
+    --color--action--danger: #F7444E;
+    --stroke: #333;
+
+    --color-text: var(--color-bg--contrast);
+    font-family: Rubik;
+    font-size: 13px;
+
+    --padding-xs: .309em;
+    --padding-s: .618em;
+    --padding-m: 1em;
+    --padding-l: 1.618em;
+    --padding-l: 2em;
+
+    --padding-rxs: .309rem;
+    --padding-rs: .618rem;
+    --padding-rm: 1rem;
+    --padding-rl: 1.618rem;
+    --padding-rxl: 2rem;
+
+    --transparency-0: 1;
+    --transparency-1: .8;
+    --transparency-2: .5;
+    --transparency-3: .3;
+
+    --button--border-radius: 4px;
+
+    --card--border-radius: .618rem;
+
+
+    --input--border-radius: 4px;
+    --input--padding: var(--padding-s);
+    --input--border-size: 1px;
+    --input--bg-color: var(--color-bg--shade-1);
+    --input--border-color: var(--input--bg-color, var(--color-bg));
+    --input--text-color: var(--color-bg--contrast);
+    --input--focus--border-color: var(--color-primary);
+    --input--focus--bg-color: var(--color-bg);
+    --input--focus--text-color: var(--color-bg--contrast);
+    --input--focus--label--text-color: var(--color-primary);
+}
