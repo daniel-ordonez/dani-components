@@ -1,12 +1,12 @@
 {
     "name": "@daniel-ordonez/do-input-select",
-    "version": "0.1.12",
+    "version": "0.1.13",
     "publishConfig": {
         "access": "public"
     },
     "dependencies": {
         "@daniel-ordonez/do-input-text-base": "^0.1.2",
-        "@daniel-ordonez/do-list": "^0.1.12"
+        "@daniel-ordonez/do-list": "^0.1.13"
     },
     "gitHead": "520753a1858595c7239d654001cc079a9052850f"
 }
