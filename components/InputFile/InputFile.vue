@@ -19,6 +19,7 @@
             </div>
             <div class="input-file__preview" v-if="preview || append">
                 <input-file-preview-card v-for="(file, index) in files"
+                    ref="preview"
                     :file="file"
                     :title="file.name"
                     :size="typeof preview === 'object' && !!preview.size"
@@ -63,7 +64,7 @@ export default {
         area.addEventListener('click', event => {
             this.focused = true
             this.trigger()
-        })
+        }, false)
         let wrapper = this.$el.querySelector('.input-file__wrapper')
         wrapper.addEventListener('focusin', event => {
             this.focused = true

@@ -49,11 +49,11 @@ button>*:not(:first-child) {
     margin-left: var(--padding-xs);
 }
 /* ICON BUTTON */
-button.btn--icon {
+button.btn--icon, .btn--icon {
+    position: relative;
     height: var(--button-radius, 2em);
     width: var(--button-radius, 2em);
     --button--border-radius: 50%;
-    cursor: pointer;
 }
 
 .btn--icon>i, .btn--icon>span{
@@ -61,6 +61,7 @@ button.btn--icon {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    font-size: 1.309em;
 }
 /* DISABLED BUTTON */
 button:disabled {

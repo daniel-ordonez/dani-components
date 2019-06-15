@@ -1,6 +1,11 @@
 <template>
-    <div class="file-preview-card">
-        <div class="file-preview-card__header">
+    <div class="file-preview-card" :class="{'no-content': contentEmpty}">
+        <div class="file-preview-card__header" >
+            <div class="fpc__progress">
+                <div class="fpc__progress__bar" 
+                    :class="{'fpc__progress__bar--complete': progress === 100}"
+                    :style="progressBar"/>
+            </div>
             <div class="fpc-info">
                 <slot name="header">
                     <div class="fpc-info__name">{{showTitle}}</div>
@@ -9,13 +14,19 @@
             </div>
             <div class="fpc-action">
                 <slot name="action">
-                    <button class="btn btn--icon" @click="$emit('remove')">
+                    <button v-if="progress === 0" class="btn btn--icon" @click="$emit('remove')">
                         <i class='uil uil-times'></i>
                     </button>
+                    <div v-else-if="progress === 100" class="btn--icon">
+                        <i class='uil uil-cloud-check'></i>
+                    </div>
+                    <div v-else class="btn--icon">
+                        <i class='uil uil-cloud-upload'></i>
+                    </div>
                 </slot>
             </div>
         </div>
-        <div class="file-preview-card__content" :empty="contentEmpty">
+        <div class="file-preview-card__content">
             <slot name="preview">
                 <img v-if="imgSrc" :src="imgSrc">
             </slot>
@@ -31,9 +42,21 @@ export default {
         size: { type: Boolean, default: false }
     },
     data: () => ({
-        imgSrc: null
+        imgSrc: null,
+        progress: 0
     }),
     computed: {
+        progressStatus: {
+            get () { return this.progress },
+            set (value) {
+                let min = 0
+                let max = 100
+                this.progress = Math.max(min, Math.min(max, value))
+            }
+        },
+        progressBar () {
+            return `transform: scaleX(${this.progressStatus / 100});`
+        },
         contentEmpty () {
             return !this.imgSrc && !(this.$slots.preview && this.$slots.preview.length)
         },
@@ -106,10 +129,18 @@ export default {
     border-radius: var(--card--border-radius);
 }
 .file-preview-card__header {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: var(--padding-m);
+    border-top-left-radius: var(--card--border-radius);
+    border-top-right-radius: var(--card--border-radius);
+    overflow: hidden;
+}
+.no-content .file-preview-card__header {
+    border-bottom-left-radius: var(--card--border-radius);
+    border-bottom-right-radius: var(--card--border-radius);
 }
 .fpc-info {
     display: flex;
@@ -119,11 +150,30 @@ export default {
     margin-bottom: auto;
 }
 .file-preview-card__content {
+    position: relative;
     overflow: hidden;
     border-bottom-left-radius: var(--card--border-radius);
     border-bottom-right-radius: var(--card--border-radius);
 }
-.file-preview-card__content[empty] {
+.fpc__progress {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: var(--padding-s);
+    overflow: hidden;
+    z-index: -1;
+}
+.fpc__progress__bar {
+    width: 100%;
+    height: 100%;
+    transform-origin: left;
+    background: var(--color-upload, #E0EC89);
+}
+.fpc__progress__bar--complete {
+    background: var(--color-upload--completed, #AED75D);
+}
+.no-content .file-preview-card__content {
     height: 0;
 }
 .file-preview-card__content img {

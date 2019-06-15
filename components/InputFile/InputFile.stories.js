@@ -1,4 +1,5 @@
 import { storiesOf } from '@storybook/vue'
+import { action } from '@storybook/addon-actions'
 import InputFile from './InputFile'
 import InputFilePreviewCard from './InputFilePreviewCard'
 
@@ -8,8 +9,37 @@ height: 400px;
 max-height: 400px;
 `
 
+
+const savedRefs = {}
+
+const mockUpload = async () => {
+  let inputFile = savedRefs.progress
+  console.log(inputFile)
+  if (inputFile) {
+    let cards = inputFile.$refs.preview
+    if (cards && cards.length) {
+      let uploads = []
+      cards.map(card => {
+        let p = new Promise(resolve => {
+          card.progressStatus = 0
+          let interval = setInterval(() => {
+            card.progressStatus += 10
+            if (card.progressStatus >= 100) {
+              clearInterval(interval)
+              resolve()
+            }
+          }, Math.random() * 500)
+        })
+        uploads.push(p)
+      })
+      await Promise.all(uploads)
+      action('input')('upload complete')
+    }
+  }
+}
+
 storiesOf('InputFile', module)
-  .add('simple', () => ({
+  .add('single', () => ({
     components: { InputFile },
     template:
     `<div style="${containerStyle}">
@@ -32,13 +62,13 @@ storiesOf('InputFile', module)
     data: () => ({
     })
   }))
-  .add('custom', () => ({
+  .add('append', () => ({
     components: { InputFile, InputFilePreviewCard },
     template:
     `<div style="${containerStyle}">
       <input-file 
         icon="plus"
-        uploadText="Click to add more"
+        uploadText="add files"
         multiple
         label="Files">
         <div slot="append">
@@ -52,4 +82,28 @@ storiesOf('InputFile', module)
     `,
     data: () => ({
     })
+  }))
+  .add('progress', () => ({
+    components: { InputFile },
+    template:
+    `<div style="${containerStyle}">
+      <div style="width: 100%; display: flex; justify-content:center; padding: var(--padding-m);">
+        <button 
+          class="btn" 
+          @click.stop="mockUpload" >
+          upload
+        </button>
+      </div>
+      <input-file 
+        icon="plus"
+        uploadText="add files"
+        multiple  />
+    </div>
+    `,
+    data: () => ({
+      mockUpload
+    }),
+    mounted () {
+      savedRefs.progress = this.$children[0]
+    }
   }))
