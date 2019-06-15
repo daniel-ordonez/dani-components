@@ -1,27 +1,30 @@
 <template>
-    <div class="input-file" :class="{'input-file--focused': focused}" @click.stop>
-        <div v-if="label && label.length" class="input-text__label">
+    <div class="input-file" :class="{'input-file--focused': focused}" >
+        <div v-if="label && label.length" class="input-text__label" @click.stop>
             <label :for="inputId">{{label}}</label>
         </div>
         <div class="input-file__wrapper" 
-            :empty="!fileList.length" 
+            :empty="empty" 
             tabindex="0" 
             @focus="focus"
             @blur="blur">
             <div class="input-file__area">
-                <div role="icon">
-                    <i class='uil uil-upload'></i>
+                <div v-if="icon" role="icon">
+                    <i :class="`uil uil-${icon}`"></i>
                 </div>
                 <div role="placeholder">
-                {{uploadText}}
+                    {{uploadText}}
                 </div>
                 <input @change="handleFiles" :id="inputId" :multiple="multiple" type="file" style="display: none;">
             </div>
-            <div class="input-file__preview">
+            <div class="input-file__preview" v-if="preview || append">
                 <input-file-preview-card v-for="(file, index) in files"
                     :file="file"
+                    :title="file.name"
+                    :size="typeof preview === 'object' && !!preview.size"
                     :key="index"
                     @remove="removeFile(index)"/>
+                <slot name="append"/>
             </div>
         </div>
     </div>
@@ -38,12 +41,23 @@ export default {
         id: { type: String, default: '' },
         uploadText: { type: String, default: 'Upload' },
         accept: { type: String, default: '*' },
-        multiple: { type: Boolean, default: false }
+        multiple: { type: Boolean, default: false },
+        preview: { type: [Boolean, Object], default: true },
+        icon: { type: [String, Boolean], default: 'upload' }
     },
     data: () => ({
         fileList: [],
         focused: false,
     }),
+    computed: {
+        empty () { return !this.fileList.length && !this.append },
+        append () { return this.$slots.append && this.$slots.append.length },
+        inputId () { return this.id.length ? this.id : `input__${this._uid}` },
+        files: {
+            get () { return [...this.fileList] },
+            set (value) { this.$emit('input', value); this.fileList = value }
+        }
+    },
     mounted () {
         let area = this.$el.querySelector('.input-file__area')
         area.addEventListener('click', event => {
@@ -59,13 +73,6 @@ export default {
             this.focused = false
             return event
         }, true)
-    },
-    computed: {
-        inputId () { return this.id.length ? this.id : `input__${this._uid}` },
-        files: {
-            get () { return [...this.fileList] },
-            set (value) { this.$emit('input', value); this.fileList = value }
-        }
     },
     methods: {
         trigger () {
