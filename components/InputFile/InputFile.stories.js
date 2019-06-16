@@ -8,7 +8,10 @@ max-width: 400px;
 height: 400px;
 max-height: 400px;
 `
-
+const placeholderImgs = [
+  'https://via.placeholder.com/300?text=Image+1',
+  'https://via.placeholder.com/300?text=Image+2'
+]
 
 const savedRefs = {}
 
@@ -71,16 +74,18 @@ storiesOf('InputFile', module)
         uploadText="add files"
         multiple
         label="Files">
-        <div slot="append">
+        <template slot="prepend">
           <input-file-preview-card
-            title="Appended image">
-            <img slot="preview" src="https://via.placeholder.com/150"/>
+            v-for="(src, index) in pi" :key="index"
+            title="Image">
+            <img style="max-height: 150px;" slot="preview" :src="src"/>
           </input-file-preview-card>
-        </div>
+        </template>
       </input-file>
     </div>
     `,
     data: () => ({
+      pi: placeholderImgs
     })
   }))
   .add('progress', () => ({

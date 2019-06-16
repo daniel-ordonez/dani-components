@@ -17,13 +17,16 @@
                 </div>
                 <input @change="handleFiles" :id="inputId" :multiple="multiple" type="file" style="display: none;">
             </div>
-            <div class="input-file__preview" v-if="preview || append">
+            <div class="input-file__preview" v-if="preview || inserted">
+                <slot name="prepend"/>
                 <input-file-preview-card v-for="(file, index) in files"
+                    @imageLoad="onCardImageLoad"
+                    @mounted="onCardMounted"
                     ref="preview"
                     :file="file"
                     :title="file.name"
                     :size="typeof preview === 'object' && !!preview.size"
-                    :key="index"
+                    :key="`preview-card-${index}`"
                     @remove="removeFile(index)"/>
                 <slot name="append"/>
             </div>
@@ -49,14 +52,23 @@ export default {
     data: () => ({
         fileList: [],
         focused: false,
+        lastAction: 0
     }),
     computed: {
-        empty () { return !this.fileList.length && !this.append },
-        append () { return this.$slots.append && this.$slots.append.length },
+        empty () { return !this.fileList.length && !this.inserted },
+        inserted () { return !!this.$slots.append || !!this.$slots.prepend },
         inputId () { return this.id.length ? this.id : `input__${this._uid}` },
         files: {
             get () { return [...this.fileList] },
-            set (value) { this.$emit('input', value); this.fileList = value }
+            set (value) {
+                this.lastAction = value.length > this.fileList.length
+                ? 1
+                : value.length < this.fileList.length ?
+                    -1
+                    : 0
+                this.$emit('input', value)
+                this.fileList = value 
+            }
         }
     },
     mounted () {
@@ -76,6 +88,23 @@ export default {
         }, true)
     },
     methods: {
+        focusCard (node) {
+            node.scrollIntoView(true)
+        },
+        onCardImageLoad ({component}) {
+            if (this.lastAction !== 1) return
+            let cards = this.$refs.preview
+            if (!cards[cards.length - 1] === component) return
+            this.focusCard(component.$el)
+        },
+        onCardMounted (component) {
+            if (this.lastAction !== 1) return
+            let cards = this.$refs.preview
+            if (!cards[cards.length - 1] === component) return
+            let file = component.file
+            if (!file.type.startsWith('image/'))
+            this.focusCard(component.$el)
+        },
         trigger () {
             this.$el.querySelector('input[type="file"]').click()
         },
@@ -139,13 +168,20 @@ export default {
     font-size: 2em;
 }
 .input-file__preview {
+    /*
     display: grid;
     grid-template-columns: 1fr;
     grid-row-gap: var(--padding-m);
+    */
+    display: flex;
+    flex-direction: column-reverse;
     padding: 0 var(--padding-m);
     max-height: 360px;  
     overflow-y: auto;
     grid-row: 2;
+}
+.input-file__preview .file-preview-card+.file-preview-card{
+    margin-bottom: var(--padding-m);
 }
 .input-file__preview::-webkit-scrollbar {
     display: none;

@@ -28,7 +28,7 @@
         </div>
         <div class="file-preview-card__content">
             <slot name="preview">
-                <img v-if="imgSrc" :src="imgSrc">
+                <img v-if="imgSrc" @load="imageLoad" :src="imgSrc">
             </slot>
         </div>
     </div>
@@ -81,10 +81,14 @@ export default {
     },
     mounted () {
         let file = this.file
-            if (file && file.type && file.size)
-            this.previewFile(file)
+        if (file && file.type && file.size)
+        this.previewFile(file)
+        this.$emit('mounted', this)
     },
     methods: {
+        imageLoad (e) {
+            this.$emit('imageLoad', {e, component: this})
+        },
         previewFile (file) {
             const image = file.type.startsWith('image/')
             if (image) {
