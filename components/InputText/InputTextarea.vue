@@ -17,14 +17,15 @@
                 type="text"
                 @focus="focus"
                 @blur="blur"/>
-            <div v-if="append" class="input-text__append">
-                <slot name="append"/>
-            </div>
             
             <div v-if="clear" class="input-text__clear">
                 <button tabindex="0" v-if="inputValue" class="btn btn--icon" @click="inputValue = null">
                     <i class='uil uil-times'></i>
                 </button>
+            </div>
+            
+            <div v-if="append" class="input-text__append">
+                <slot name="append"/>
             </div>
 
         </div>

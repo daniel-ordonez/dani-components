@@ -1,7 +1,7 @@
 <template>
     <div class="slider">
         <div class="slider__controls">
-            <div class="slider-control" v-if="images.length > 1">
+            <div class="slider-control" v-if="showControls">
                 <button class="btn btn--icon" @click="imageIndex--">
                     <i class='uil uil-angle-left'></i>
                 </button>
@@ -9,7 +9,7 @@
             <slot name="control">
                 <div></div>
             </slot>
-            <div class="slider-control" v-if="images.length > 1">
+            <div class="slider-control" v-if="showControls">
                 <button class="btn btn--icon" @click="imageIndex++">
                     <i class='uil uil-angle-right'></i>
                 </button>
@@ -25,7 +25,7 @@
                 </template>
             </div>
         </div>
-        <div class="slider__dots" v-if="images.length > 1">
+        <div class="slider__dots" v-if="showControls">
             <span v-for="(item, index) in images" 
                 :key="index" 
                 class="dot"
@@ -47,6 +47,7 @@ export default {
         index: 0
     }),
     computed: {
+        showControls () { return this.images.length > 1 },
         imageIndex: {
             get () { return this.index },
             set (value) {
