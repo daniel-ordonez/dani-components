@@ -10,7 +10,18 @@ const images = [
   "https://via.placeholder.com/150/FFFFFF/000000?image5"
 ]
 storiesOf('Slider', module)
-.add('slider', () => ({
+.add('single', () => ({
+  components: { Slider },
+  template: `
+  <div style="${style}">
+      <slider :images="images">
+      </slider>
+  </div>`,
+  data: () => ({
+    images: [images[0]]
+  })
+}))
+.add('gallery', () => ({
     components: { Slider },
     template: `
     <div style="${style}">

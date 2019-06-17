@@ -1,5 +1,5 @@
 
-input[type="text"], input[type="number"], input[type="date"] {
+input[type="text"], input[type="number"], input[type="date"], textarea {
     line-height: 1;
     box-sizing: border-box;
     margin: 0;
@@ -13,11 +13,13 @@ input[type="text"], input[type="number"], input[type="date"] {
     text-align: inherit;
     font-size: inherit
 }
+
 .input-text {
     border-radius: var(--input--border-radius);
     display: flex;
     flex-direction: column;
 }
+
 .input-text[small] {
     max-width: 16em;
 }
@@ -82,6 +84,14 @@ input[type=number]::-webkit-inner-spin-button {
 .input-text input[type="text"]::placeholder, .input-text input[type="number"]::placeholder {
     color: var(--input--text-color);
     opacity: var(--transparency-2, 0.5);
+}
+.input-text textarea {
+    resize: vertical;
+}
+.input-text textarea::-webkit-scrollbar {
+    display: none;
+    opacity: 0;
+    width: 0px;
 }
 .input-text__clear {
     display: flex;
