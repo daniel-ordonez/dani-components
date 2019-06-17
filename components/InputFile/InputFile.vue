@@ -15,7 +15,13 @@
                 <div role="placeholder">
                     {{uploadText}}
                 </div>
-                <input @change="handleFiles" :id="inputId" :multiple="multiple" type="file" style="display: none;">
+                <input 
+                    @change="handleFiles" 
+                    :id="inputId" 
+                    :accept="accept"
+                    :multiple="multiple" 
+                    type="file" 
+                    style="display: none;">
             </div>
             <div class="input-file__preview" v-if="preview || inserted">
                 <slot name="prepend"/>
