@@ -75,7 +75,7 @@ export default {
         let el = this.$el
         let bcr = el.getBoundingClientRect()
         let src = this.images[this.index]
-        let keys = ['x', 'y', 'width', 'height']
+        let keys = ['left', 'top', 'right', 'bottom', 'width', , 'height']
         let img = this.$refs.zoomedImg
         keys.map(i => {
             img.style[i] = `${bcr[i]}px`
@@ -100,11 +100,21 @@ export default {
             if (value) {
                 let el = this.$el
                 let bcr = el.getBoundingClientRect()
-                let keys = ['width', 'height']
+                let keys = ['left', 'top', 'right', 'bottom', 'width', , 'height']
                 keys.map(i => {
                     img.style[i] = `${bcr[i]}px`
                 })
+                setTimeout(() => {
+                    if (!img.classList.contains('enabled')) {
+                        img.style.opacity = 0
+                    }
+                }, 200)
             } else {
+                img.style.opacity = 1
+                let keys = ['left', 'top', 'right', 'bottom']
+                keys.map(i => {
+                    img.style[i] = 0
+                })
                 img.style.width = '100%'
                 img.style.height = '100%'
             }
@@ -159,9 +169,7 @@ export default {
     justify-content: center;
     align-items: center;
     background: black;
-}
-.zoomed-image {
-    transition: width .2s ease-in-out, height .2s ease-in-out;
+    transition: all .2s ease-in-out;
 }
 .zoomed-image:not(.enabled) {
     pointer-events: none;
@@ -170,6 +178,10 @@ export default {
     pointer-events: initial;
     z-index: 1000;
     cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 .slider-control {
     display: flex;

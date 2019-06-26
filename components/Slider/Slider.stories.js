@@ -1,7 +1,7 @@
 import { storiesOf } from '@storybook/vue'
 import Slider from './Slider'
 
-const style = "max-width: 400px; height: 400px;"
+const style = "max-width: 400px; height: 400px; margin-left: auto; margin-right: auto;"
 const images = [
   "https://via.placeholder.com/150/0000FF/808080?image1",
   "https://via.placeholder.com/150/FF0000/FFFFFF?image2",
