@@ -75,29 +75,34 @@ export default {
         let el = this.$el
         let bcr = el.getBoundingClientRect()
         let src = this.images[this.index]
-        let keys = ['left', 'top', 'right', 'bottom', 'width', , 'height']
         let img = this.$refs.zoomedImg
-        keys.map(i => {
-            img.style[i] = `${bcr[i]}px`
-        })
+        this.zoomImage(img, false)
         img.addEventListener('click', event => {
             console.log('click')
-            this.zoom(event)
+            this.zoom(event, false)
         })
     },
     methods: {
         zoom (event) {
             let img = this.$refs.zoomedImg
             if (img.classList.contains('enabled')) {
-                this.zoomImage(img, true)
-            } else {
                 this.zoomImage(img, false)
+            } else {
+                this.zoomImage(img, true)
             }
-            img.classList.toggle('enabled')
         },
         zoomImage (target = null, value = true) {
             let img = target ? target : this.$refs.zoomedImg
             if (value) {
+                img.style.opacity = 1
+                let keys = ['left', 'top', 'right', 'bottom']
+                keys.map(i => {
+                    img.style[i] = 0
+                })
+                img.style.width = '100%'
+                img.style.height = '100%'
+                img.classList.add('enabled')
+            } else {
                 let el = this.$el
                 let bcr = el.getBoundingClientRect()
                 let keys = ['left', 'top', 'right', 'bottom', 'width', , 'height']
@@ -109,14 +114,7 @@ export default {
                         img.style.opacity = 0
                     }
                 }, 200)
-            } else {
-                img.style.opacity = 1
-                let keys = ['left', 'top', 'right', 'bottom']
-                keys.map(i => {
-                    img.style[i] = 0
-                })
-                img.style.width = '100%'
-                img.style.height = '100%'
+                img.classList.remove('enabled')
             }
         }
     }
@@ -169,7 +167,7 @@ export default {
     justify-content: center;
     align-items: center;
     background: black;
-    transition: all .2s ease-in-out;
+    transition: all .3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
 }
 .zoomed-image:not(.enabled) {
     pointer-events: none;
