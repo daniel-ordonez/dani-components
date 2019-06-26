@@ -1,6 +1,6 @@
 {
     "name": "@daniel-ordonez/do-input-number",
-    "version": "0.0.15",
+    "version": "0.0.16",
     "publishConfig": {
         "access": "public"
     },
