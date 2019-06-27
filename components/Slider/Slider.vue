@@ -78,7 +78,6 @@ export default {
         let img = this.$refs.zoomedImg
         this.zoomImage(img, false)
         img.addEventListener('click', event => {
-            console.log('click')
             this.zoom(event, false)
         })
     },
@@ -91,9 +90,18 @@ export default {
                 this.zoomImage(img, true)
             }
         },
-        zoomImage (target = null, value = true) {
+        placeZoomImage (img) {
+            let bcr = this.$el.getBoundingClientRect()
+            let keys = ['left', 'top', 'right', 'bottom', 'width', , 'height']
+            keys.map(i => {
+                img.style[i] = `${bcr[i]}px`
+            })
+        },
+        async zoomImage (target = null, value = true) {
             let img = target ? target : this.$refs.zoomedImg
             if (value) {
+                this.placeZoomImage(img)
+                await this.$nextTick()
                 img.style.opacity = 1
                 let keys = ['left', 'top', 'right', 'bottom']
                 keys.map(i => {
@@ -103,18 +111,13 @@ export default {
                 img.style.height = '100%'
                 img.classList.add('enabled')
             } else {
-                let el = this.$el
-                let bcr = el.getBoundingClientRect()
-                let keys = ['left', 'top', 'right', 'bottom', 'width', , 'height']
-                keys.map(i => {
-                    img.style[i] = `${bcr[i]}px`
-                })
+                this.placeZoomImage(img)
                 setTimeout(() => {
-                    if (!img.classList.contains('enabled')) {
+                    if (img.classList.contains('enabled')) {
+                        img.classList.remove('enabled')
                         img.style.opacity = 0
                     }
                 }, 200)
-                img.classList.remove('enabled')
             }
         }
     }
@@ -131,30 +134,10 @@ export default {
     overflow: hidden;
 }
 .slider__controls {
-    /*
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    display: grid;
-    grid-template-columns: minmax(min-content, 20%) 1fr minmax(min-content, 20%);
-    grid-template-rows: 1fr;
-    z-index: 2;
-    */
     position: relative;
     width: 100%;
     height: 100%;
 }
-/*
-.slider-control {
-    --color-bg--contrast: var(--color-bg);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2rem;
-}
-*/
 .zoomed-image>img{
     height: 100%;
     width: 100%;
@@ -166,13 +149,13 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: black;
-    transition: all .3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+    background-color: rgba(0,0,0,0);
 }
 .zoomed-image:not(.enabled) {
     pointer-events: none;
 }
 .zoomed-image.enabled {
+    transition: all .3s ease-out;
     pointer-events: initial;
     z-index: 1000;
     cursor: pointer;
@@ -180,6 +163,7 @@ export default {
     left: 0;
     right: 0;
     bottom: 0;
+    background-color: rgba(0,0,0,8);
 }
 .slider-control {
     display: flex;
