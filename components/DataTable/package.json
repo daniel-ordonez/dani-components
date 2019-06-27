@@ -1,6 +1,6 @@
 {
     "name": "@daniel-ordonez/do-data-table",
-    "version": "0.1.20",
+    "version": "0.1.21",
     "publishConfig": {
         "access": "public"
     },
