@@ -32,7 +32,8 @@ export default {
     --color-text: var(--color-primary--shade-3);
 }
 .list-item__icon {
-    margin-right: .618rem;
+    font-size: 1.309em;
+    line-height: 0;
 }
 .list-item {
     --color-text: var(--color-dark-2);
