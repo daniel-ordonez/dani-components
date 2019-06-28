@@ -1,0 +1,7 @@
+{
+    "name": "@daniel-ordonez/do-collapse",
+    "version": "0.0.0",
+    "publishConfig": {
+        "access": "public"
+    }
+}
