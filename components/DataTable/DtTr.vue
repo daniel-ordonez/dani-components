@@ -8,14 +8,14 @@
 export default {
     mounted () {
         let el = this.$el
-        el.addEventListener('click', () => {
-            this.$emit('click')
+        el.addEventListener('click', event => {
+            this.$emit('click', event)
         })
-        el.addEventListener('mouseover', () => {
-            this.$emit('mouseover')
+        el.addEventListener('mouseover', event => {
+            this.$emit('mouseover', event)
         })
-        el.addEventListener('mouseleave', () => {
-            this.$emit('mouseleave')
+        el.addEventListener('mouseleave', event => {
+            this.$emit('mouseleave', event)
         })
     }
 }

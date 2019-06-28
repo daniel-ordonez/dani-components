@@ -152,6 +152,7 @@ export default {
     background-color: rgba(0,0,0,0);
 }
 .zoomed-image:not(.enabled) {
+    opacity: 0;
     pointer-events: none;
 }
 .zoomed-image.enabled {
