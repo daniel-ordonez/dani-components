@@ -1,6 +1,8 @@
 <template>
     <div class="modal">
-        <transition-group name="modal">
+        <transition-group name="modal" 
+            @after-enter="$emit('afterEnter')"
+            @after-leave="$emit('afterleave')">
             <template v-if="value">
                 <div class="modal-screen" @click.stop="outside" key="modal-screen"/>
                 <div class="modal-container" key="modal-container" >
