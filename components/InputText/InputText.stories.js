@@ -9,12 +9,37 @@ storiesOf('InputText', module)
     `
       <input-text
         label="Name"
-        id="input-text-name"
+        id="input-text-text"
         clear
       />
     `,
     data: () => ({
     })
+  }))
+  .add('password', () => ({
+    components: { InputText },
+    template:
+    `
+      <input-text
+        :type="type"
+        label="Name"
+        id="input-text-password"
+        clear
+      >
+        <button class="btn btn--icon" slot="append" @click="toggle">
+          <i v-if="type === 'password'" class='uil uil-eye'></i>
+          <i v-else class='uil uil-eye-slash'></i>
+        </button>
+      </input-text>
+    `,
+    data: () => ({
+      type: 'password'
+    }),
+    methods: {
+      toggle () {
+        this.type = this.type === 'text' ? 'password' : 'text'
+      }
+    }
   }))
   .add('textarea', () => ({
     components: { InputTextarea },
@@ -22,7 +47,7 @@ storiesOf('InputText', module)
     `
       <input-textarea
         label="Name"
-        id="input-text-name"
+        id="input-text-textarea"
         clear
       />
     `,

@@ -22,7 +22,6 @@ export default {
 </script>
 
 <style>
-
 .list-item:hover {
     background: var(--color-bg--shade-2);
     --color-text: var(--color-dark-3);
@@ -32,7 +31,6 @@ export default {
     --color-text: var(--color-primary--shade-3);
 }
 .list-item__icon {
-    margin: 0;
     font-size: 1.309em;
     line-height: 0;
 }

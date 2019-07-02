@@ -14,7 +14,7 @@
                 v-model="inputValue"
                 v-bind="$attrs"
                 class="input-text__text"
-                type="text"
+                :type="type"
                 @focus="focus"
                 @blur="blur">
             
@@ -37,6 +37,13 @@ import InputTextBase from '@daniel-ordonez/do-input-text-base/InputTextBase'
 export default {
     name: 'input-text',
     extends: InputTextBase,
+    props: {
+        type: {
+            type: String,
+            default: 'text',
+            validator: str => ['text', 'password'].includes(str)
+        }
+    },
     computed: {
         inputValue: {
             get () { return this.value ? this.value : this.content },
