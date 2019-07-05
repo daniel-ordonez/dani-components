@@ -2,6 +2,7 @@ import { storiesOf } from '@storybook/vue'
 import { action } from '@storybook/addon-actions'
 import InputFile from './InputFile'
 import InputFilePreviewCard from './InputFilePreviewCard'
+import InputFileButton from './InputFileButton'
 
 const containerStyle = `
 max-width: 400px;
@@ -42,6 +43,19 @@ const mockUpload = async () => {
 }
 
 storiesOf('InputFile', module)
+  .add('button', () => ({
+    components: { InputFileButton },
+    template:
+    `<div style="${containerStyle}">
+      <input-file-button class="btn">
+        Upload file
+      </input-file-button>
+    </div>
+    `,
+    data: () => ({
+      preview: { size: true }
+    })
+  }))
   .add('single', () => ({
     components: { InputFile },
     template:
