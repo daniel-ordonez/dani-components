@@ -46,7 +46,7 @@ export default {
     },
     computed: {
         inputValue: {
-            get () { return this.value ? this.value : this.content },
+            get () { return this.value !== null ? this.value : this.content },
             set (value) { this.$emit('input', value); this.content = value }
         }
     }
