@@ -20,6 +20,16 @@ input[type="text"], input[type="password"], input[type="number"], input[type="da
     flex-direction: column;
 }
 
+.input-text[error], .input-text.input-text--focused[error] {
+    --input--border-color: red;
+    --input--focus--label--text-color: red;
+}
+.input-text[success], .input-text.input-text--focused[success] {
+    --input--border-color: green;
+    --input--focus--label--text-color: green;
+}
+
+
 .input-text[small] {
     max-width: 16em;
 }

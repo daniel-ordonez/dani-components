@@ -7,22 +7,36 @@ storiesOf('InputText', module)
     components: { InputText },
     template:
     `
+    <div style="display: flex; flex-direction: column;">
       <input-text
-        label="Name"
+        label="Text"
+        v-model="text"
         id="input-text-text"
         clear
       />
+      <input-text
+        label="Text w/trim"
+        v-model="textwtrim"
+        id="input-text-text"
+        trim
+        clear
+      />
+    </div>
     `,
     data: () => ({
+      text: null,
+      textwtrim: null
     })
   }))
   .add('password', () => ({
     components: { InputText },
     template:
     `
+    <div style="display: flex; flex-direction: column;">
       <input-text
         :type="type"
-        label="Name"
+        label="Password"
+        v-model="text"
         id="input-text-password"
         clear
       >
@@ -31,9 +45,66 @@ storiesOf('InputText', module)
           <i v-else class='uil uil-eye-slash'></i>
         </button>
       </input-text>
+      <input-text
+        :type="type"
+        validate="blur"
+        label="Validate on blur"
+        v-model="text"
+        :rules="rules"
+        placeholder="Use only numbers"
+        id="input-text-password-vob"
+        clear
+      >
+        <button class="btn btn--icon" slot="append" @click="toggle">
+          <i v-if="type === 'password'" class='uil uil-eye'></i>
+          <i v-else class='uil uil-eye-slash'></i>
+        </button>
+      </input-text>
+      <input-text
+        :type="type"
+        validate="always"
+        label="Validate on input"
+        v-model="text"
+        :rules="rules"
+        placeholder="Use only numbers"
+        id="input-text-password-voi"
+        clear
+      >
+        <button class="btn btn--icon" slot="append" @click="toggle">
+          <i v-if="type === 'password'" class='uil uil-eye'></i>
+          <i v-else class='uil uil-eye-slash'></i>
+        </button>
+      </input-text>
+
+      <input-text
+        :type="type"
+        validate="always"
+        onValidated="success"
+        label="Success state"
+        v-model="text"
+        :rules="rulesS"
+        placeholder="Use at least 3 characters"
+        id="input-text-password-s"
+        clear
+      >
+        <button class="btn btn--icon" slot="append" @click="toggle">
+          <i v-if="type === 'password'" class='uil uil-eye'></i>
+          <i v-else class='uil uil-eye-slash'></i>
+        </button>
+      </input-text>
+    </div>
     `,
     data: () => ({
-      type: 'password'
+      type: 'password',
+      text: null,
+      rules: [{
+        f: str => !isNaN(str),
+        m: 'Value must be a number (0-9)'
+      }],
+      rulesS: [{
+        f: str => typeof str === 'string' && str.length >= 3,
+        m: 'Value has at least 3 characters'
+      }]
     }),
     methods: {
       toggle () {
@@ -46,11 +117,13 @@ storiesOf('InputText', module)
     template:
     `
       <input-textarea
-        label="Name"
+        label="Textarea"
+        v-model="text"
         id="input-text-textarea"
         clear
       />
     `,
     data: () => ({
+      text: null
     })
   }))

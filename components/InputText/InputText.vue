@@ -1,5 +1,7 @@
 <template>
-    <div class="input-text" :class="{'input-text--focused': focused}">
+    <div class="input-text" :class="{'input-text--focused': focused}" 
+        :success="success"
+        :error="hasError">
         <div v-if="label && label.length" class="input-text__label">
             <label :for="inputId">{{label}}</label>
         </div>
@@ -33,6 +35,7 @@
 </template>
 
 <script>
+import debounce from 'lodash/debounce'
 import InputTextBase from '@daniel-ordonez/do-input-text-base/InputTextBase'
 export default {
     name: 'input-text',
@@ -44,11 +47,25 @@ export default {
             validator: str => ['text', 'password'].includes(str)
         }
     },
+    watch: {
+        content (value) {
+            this.validate === 'always' && this.debounceFunction(this.testRules)
+        }
+    },
     computed: {
         inputValue: {
-            get () { return this.value !== null ? this.value : this.content },
-            set (value) { this.$emit('input', value); this.content = value }
+            get () { return this.value !== undefined && this.value !== null ? this.value : this.content },
+            set (value) {
+                value = typeof value === 'string' && this.trim ? value.trim() : value
+                this.$emit('input', value);
+                this.content = value
+            }
         }
+    },
+    methods: {
+        debounceFunction: debounce(f => {
+            typeof f === 'function' && f()
+        }, 200)
     }
 }
 </script>
