@@ -49,8 +49,8 @@ export default {
         },
         blur (event) {
             this.focused = false
-            this.validation === 'blur' && this.validate()
             this.$emit('blur', event)
+            this.validation === 'blur' && this.validate()
         },
         validate () {
             let v = this.content
@@ -79,6 +79,7 @@ export default {
                     break
             }
             this.msgs.length && this.$emit('messages', this.msgs)
+            this.$emit('onValidate', !this.hasError)
             return !this.hasError
         },
         reset () {
