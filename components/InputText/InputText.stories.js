@@ -47,7 +47,7 @@ storiesOf('InputText', module)
       </input-text>
       <input-text
         :type="type"
-        validate="blur"
+        validation="blur"
         label="Validate on blur"
         v-model="text"
         :rules="rules"
@@ -62,7 +62,7 @@ storiesOf('InputText', module)
       </input-text>
       <input-text
         :type="type"
-        validate="always"
+        validation="always"
         label="Validate on input"
         v-model="text"
         :rules="rules"
@@ -78,7 +78,7 @@ storiesOf('InputText', module)
 
       <input-text
         :type="type"
-        validate="always"
+        validation="always"
         onValidated="success"
         label="Success state"
         v-model="text"

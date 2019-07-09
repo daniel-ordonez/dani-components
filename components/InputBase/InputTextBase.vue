@@ -13,7 +13,7 @@ export default {
         rules: { type: Array, default: () => [] },
         trim: { type: Boolean, default: false },
         clear: { type: Boolean, default: false },
-        validate: { 
+        validation: { 
             type: String, 
             default: 'never', 
             validator: str => ['never', 'blur', 'always'].includes(str) 
@@ -37,6 +37,11 @@ export default {
         append () { return this.$slots.append },
         inputId () { return this.id.length ? this.id : `input__${this._uid}` }
     },
+    watch: {
+        state (newState, oldState) {
+            newState !== oldState  && this.$emit('stateChanged', newState)
+        }
+    },
     methods: {
         focus (event) {
             this.focused = true
@@ -44,11 +49,10 @@ export default {
         },
         blur (event) {
             this.focused = false
+            this.validation === 'blur' && this.validate()
             this.$emit('blur', event)
-            this.validate === 'blur' && this.testRules()
         },
-        testRules () {
-            console.log('test')
+        validate () {
             let v = this.content
             this.state = INPUT_STATE.INITIAL
             let failed = false
@@ -62,15 +66,20 @@ export default {
             }
             switch (this.onValidated) {
                 case 'error':
-                    if (failed) this.state = INPUT_STATE.ERROR
+                    if (failed) {
+                        this.state = INPUT_STATE.ERROR
+                    }
                     this.hasError = this.state === INPUT_STATE.ERROR
                     break
                 case 'success':
-                    if (!failed) this.state = INPUT_STATE.SUCCESS
+                    if (!failed) {
+                        this.state = INPUT_STATE.SUCCESS
+                    }
                     this.success = this.state === INPUT_STATE.SUCCESS
                     break
             }
-            
+            this.msgs.length && this.$emit('messages', this.msgs)
+            return !this.hasError
         },
         reset () {
             this.content = ''

@@ -49,7 +49,7 @@ export default {
     },
     watch: {
         content (value) {
-            this.validate === 'always' && this.debounceFunction(this.testRules)
+            this.validation === 'always' && this.debounceFunction(this.validate)
         }
     },
     computed: {
