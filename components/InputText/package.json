@@ -1,11 +1,11 @@
 {
   "name": "@daniel-ordonez/do-input-text",
-  "version": "0.1.34",
+  "version": "0.1.35",
   "publishConfig": {
     "access": "public"
   },
   "gitHead": "fdccaaff50532092bb4d7cd41d56486cb1cc94c1",
   "dependencies": {
-    "@daniel-ordonez/do-input-text-base": "^0.1.4"
+    "@daniel-ordonez/do-input-text-base": "^0.1.5"
   }
 }
