@@ -6,7 +6,11 @@ const INPUT_STATE = {
 }
 export default {
     props: {
-        value: { type: String, default: '' },
+        value: { 
+            type: [String, Object], 
+            default: null, 
+            validator: v =>  typeof v === 'string' || v === null
+        },
         label: { type: String, default: '' },
         id: { type: String, default: '' },
         required: { type: Boolean, default: false },

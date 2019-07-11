@@ -9,6 +9,7 @@ storiesOf('InputText', module)
     `
     <div style="display: flex; flex-direction: column;">
       <input-text
+        ref="text"
         label="Text"
         v-model="text"
         id="input-text-text"
@@ -21,12 +22,18 @@ storiesOf('InputText', module)
         trim
         clear
       />
+      <button class="btn" @click="clearText">Clear text</button>
     </div>
     `,
     data: () => ({
       text: null,
       textwtrim: null
-    })
+    }),
+    methods: {
+      clearText () {
+        this.$refs.text.reset()
+      }
+    }
   }))
   .add('password', () => ({
     components: { InputText },

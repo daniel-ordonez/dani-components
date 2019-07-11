@@ -21,7 +21,8 @@
                 @blur="blur">
             
             <div v-if="clear" class="input-text__clear">
-                <button tabindex="0" v-if="inputValue" class="btn btn--icon" @click="inputValue = null">
+                <button tabindex="0" v-if="inputValue" class="btn btn--icon" 
+                @click="reset">
                     <i class='uil uil-times'></i>
                 </button>
             </div>
@@ -57,8 +58,8 @@ export default {
             get () { return this.value !== undefined && this.value !== null ? this.value : this.content },
             set (value) {
                 value = typeof value === 'string' && this.trim ? value.trim() : value
-                this.$emit('input', value);
                 this.content = value
+                this.$emit('input', value);
             }
         }
     },

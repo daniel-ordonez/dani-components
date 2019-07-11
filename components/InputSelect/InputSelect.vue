@@ -9,12 +9,15 @@
             </div>
 
             <input 
+                ref="input"
                 tabindex="0"
                 :id="inputId"
                 v-model="inputValue"
                 v-bind="$attrs"
                 class="input-text__text"
                 type="text"
+                @keydown="keymonitor"
+                @mousedown="dataList = true"
                 @focus="focus"
                 @blur="blur">
             
@@ -107,6 +110,9 @@ export default {
             const key = keyEvent.key
             if (key === 'Tab') {
                 this.dataList = false
+            } else if (!this.dataList && this.focused && key === 'ArrowDown') {
+                this.dataList = true
+                return
             } else if (this.dataList) {
                 let dataList = this.$refs.dataList
                 if (!dataList) return
