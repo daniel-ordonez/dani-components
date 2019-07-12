@@ -1,5 +1,5 @@
 <template>
-    <div class="input-text inpute--select" :class="{'input-text--focused': focused}">
+    <div class="input-text input--select" :class="{'input-text--focused': focused}">
         <div v-if="label && label.length" class="input-text__label">
             <label :for="inputId">{{label}}</label>
         </div>

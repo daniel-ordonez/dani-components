@@ -1,6 +1,7 @@
 import { storiesOf } from '@storybook/vue'
 import { action } from '@storybook/addon-actions'
 import InputSelect from './InputSelect'
+import InputOptions from './InputOptions'
 
 const style = 'max-width:400px'
 
@@ -27,6 +28,18 @@ storiesOf('InputSelect', module)
     style="${style}" />`,
     data: () => ({
         items
+    }),
+    methods: InputMethods
+  }))
+  .add('few options', () => ({
+    components: { InputOptions },
+    template: `<input-options 
+    label="Weekend days" 
+    :options="items" 
+    @input="onInput" 
+    style="${style}" />`,
+    data: () => ({
+        items: ['Friday', 'Saturday', 'Sunday']
     }),
     methods: InputMethods
   }))
