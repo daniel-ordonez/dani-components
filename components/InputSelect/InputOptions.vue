@@ -1,6 +1,6 @@
 <template>
-    <div class="input-options" :class="{'input-options--focused': focused}">
-        <div v-if="label && label.length" class="input-options__label">
+    <div class="input-text input-options" :class="{'input-options--focused': focused}">
+        <div v-if="label && label.length" class="input-text__label">
             <label :for="inputId">{{label}}</label>
         </div>
         <div class="input-options__wrapper">
@@ -48,6 +48,7 @@ export default {
     methods: {
         select (item) {
             this.selected = item
+            this.$emit('input', item)
         }
     }
 }
@@ -76,7 +77,7 @@ export default {
 .input-options__wrapper>button[selected]:active{
     color: var(--color-primary);
     --button--hover--bg: transparent;
-    --button--active--bg: transparent;
+    --button--active--bg: var(--color-primary--light-3);
 }
 .input-options__wrapper>button[selected]::after {
     position: absolute;

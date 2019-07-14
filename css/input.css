@@ -124,3 +124,70 @@ input[type=number]::-webkit-inner-spin-button {
 .input-file__wrapper:focus {
     outline: none;
 }
+
+
+
+
+
+/*TOGGLE*/
+
+
+.toggle {
+    --toggle-size-unit: 1em;
+    --toggle-slider-border-width: 0px;
+    --toggle-slider-boder-color: rgba(0,0,0,0.4);
+    --toggle-height: calc(var(--toggle-size-unit) * 2);
+    --toggle-width: calc(var(--toggle-size-unit) * 4);
+    --toggle-background-color: var(--color-gray-2);
+    position: relative;
+    display: block;
+    height: var(--toggle-height);
+    width: var(--toggle-width);
+  }
+  .toggle input {
+    display: none;
+  }
+  .toggle__slider {
+    --toggle-slider-padding: 4px;
+    --toggle-slider-size: calc( ( var(--toggle-size-unit) * 2) - ( var(--toggle-slider-padding) * 2) );
+    --toggle-slider-left: calc( var(--toggle-slider-padding) - var(--toggle-slider-border-width) );
+    --toggle-slider-top: calc( var(--toggle-slider-padding) - var(--toggle-slider-border-width) );
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--toggle-background-color);
+    border: var(--toggle-slider-border-width) solid var(--toggle-slider-boder-color);
+    transition: .5s;
+    box-shadow: 0 1px 1px 1px rgba(0,0,0,0.1);
+    border-radius: var(--toggle-size-unit);
+  }
+  .dark .toggle, .toggle.dark {
+    --toggle-background-color: var(--background-color);
+    --toggle-slider-border-width: 2px;
+    --toggle-slider-boder-color: var(--text-color);
+    box-shadow: none;
+  }
+  .toggle input:checked + .toggle__slider {
+    background: var(--color-primary);
+    --toggle-slider-left: calc( 100% - ( var(--toggle-slider-size) + var(--toggle-slider-padding) - ( var(--toggle-slider-border-width) + var(--toggle-slider-padding) ) ) );
+    --toggle-slider-left: calc( 50% + var(--toggle-slider-padding) );
+  }
+  .toggle__slider::before {
+    position: absolute;
+    content: "";
+    width: var(--toggle-slider-size);
+    height: var(--toggle-slider-size);
+    border-radius: 50%;
+    left: var(--toggle-slider-left);
+    top: var(--toggle-slider-top);
+    background: white;
+    box-shadow: 0 1px 1px 1px rgba(0,0,0,0.1);
+    will-change: left;
+    transition: .5s;
+  }
+  .dark .toggle__slider::before {
+    box-shadow: none;
+  }

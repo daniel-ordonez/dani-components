@@ -61,7 +61,7 @@ export default {
         filteredSuggestions: []
     }),
     props: {
-        items: {
+        options: {
             type: Array,
             default: () => []
         }
@@ -78,7 +78,7 @@ export default {
             if (!value || value === '' || !value.length) this.content = ''
             this.updateSuggestions()
         },
-        items () {
+        options () {
             this.updateSuggestions()
         }
     },
@@ -94,7 +94,7 @@ export default {
     },
     methods: {
         updateSuggestions () {
-            this.items.length && this.fSuggestions && this.fSuggestions(this.content, [...this.items], (suggestions) => {this.filteredSuggestions = suggestions})
+            this.options.length && this.fSuggestions && this.fSuggestions(this.content, [...this.options], (suggestions) => {this.filteredSuggestions = suggestions})
         },
         focus () {
             this.focused = true
