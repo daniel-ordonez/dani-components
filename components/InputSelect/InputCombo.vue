@@ -12,6 +12,7 @@
                 ref="input"
                 tabindex="0"
                 :id="inputId"
+                readonly
                 v-model="inputValue"
                 v-bind="$attrs"
                 class="input-text__text"
@@ -21,6 +22,9 @@
                 @focus="focus"
                 @blur="blur">
             
+            <div class="btn btn--icon" style="user-select: none; font-size: var(--text-m2)">
+                <i class='uil uil-angle-down'></i>
+            </div>
             <div v-if="clear" class="input-text__clear">
                 <button tabindex="0" v-if="inputValue" class="btn btn--icon" @click="inputValue = null">
                     <i class='uil uil-times'></i>
@@ -63,32 +67,48 @@ export default {
         options: {
             type: Array,
             default: () => []
+        },
+        dataLabel: {
+            type: String,
+            default: 'label'
         }
     },
     computed: {
         inputValue: {
             get () { 
-                let {value} = this
-                return  value ? value : this.content 
+                let {value, dataLabel} = this
+                return  value
+                ? typeof value === 'string'
+                    ? value
+                    : typeof value === 'object'
+                        ? value[dataLabel]
+                        : value
+                : this.content 
             },
             set (value) {
-                this.$emit('input', value)
+                let {dataLabel, options} = this
+                // search for object with dataLabel equal to value
+                let realValue = options.find(item => {
+                    return typeof item === 'string' && item === value
+                    ? item
+                    : typeof item === 'object' && item[dataLabel] === value
+                        ? item
+                        : false
+                }) || value
+                this.$emit('input', realValue)
                 this.content = value
             }
         },
         suggestions () { return this.filteredSuggestions }
     },
     watch: {
-        value (value) {
-            if (!value || value === '' || !value.length) this.content = ''
-            this.updateSuggestions()
-        },
         options () {
             this.updateSuggestions()
         }
     },
     mounted () {
         document.body.addEventListener('click', event => {
+            this.$emit('click', event)
             let closest = event.target.closest(`#${this.inputId}`)
             if (!closest) this.dataList = false
         })
@@ -96,17 +116,23 @@ export default {
     },
     methods: {
         filterOptions (filter, cb) {
-            let {options} = this
-            let suggestions = options.filter(
-                item => typeof item === 'string' && item.match(new RegExp(`.*${filter}.*`))
+            let {options, dataLabel} = this
+            let suggestions = options.map(
+                item => typeof item === 'string'
+                ? item.match(new RegExp(`.*${filter}.*`))
+                : typeof item === 'object'
+                    ? typeof item[dataLabel] === 'string'
+                    && item[dataLabel].match(new RegExp(`.*${filter}.*`))
+                        ? item[dataLabel]
+                        : null
+                    : null
             )
-            console.log(suggestions)
             cb && cb(suggestions)
         },
         updateSuggestions () {
             let {options} = this
             let filter = this.content
-            let cb = suggestions => {this.filteredSuggestions = suggestions}
+            let cb = (suggestions) => {this.filteredSuggestions = suggestions}
             options.length && throttle(this.filterOptions, 300)(filter, cb)
         },
         focus () {

@@ -1,6 +1,7 @@
 import { storiesOf } from '@storybook/vue'
 import { action } from '@storybook/addon-actions'
 import InputSelect from './InputSelect'
+import InputCombo from './InputCombo'
 import InputOptions from './InputOptions'
 import InputToggle from './InputToggle'
 
@@ -18,17 +19,42 @@ const items = [
     'Saturday',
     'Sunday'
 ]
+const items2 = [
+  {label: 'Monday', value: 1},
+  {label: 'Tuesday', value: 2},
+  {label: 'Wednesday', value: 3},
+  {label: 'Thursday', value: 4},
+  {label: 'Friday', value: 5},
+  {label: 'Saturday', value: 6},
+  {label: 'Sunday', value: 7}
+]
 
 storiesOf('InputSelect', module)
   .add('list of text', () => ({
     components: { InputSelect },
     template: `<input-select 
     label="Day of the week" 
+    v-model="value" 
     :options="items" 
     @input="onInput" 
     style="${style}" />`,
     data: () => ({
-        items
+        items,
+        value: null
+    }),
+    methods: InputMethods
+  }))
+  .add('combo box', () => ({
+    components: { InputCombo },
+    template: `<input-combo 
+    label="Day of the week"
+    v-model="value" 
+    :options="items2" 
+    @input="onInput" 
+    style="${style}" />`,
+    data: () => ({
+        items2,
+        value: null
     }),
     methods: InputMethods
   }))
