@@ -56,7 +56,7 @@ import DataList from '@daniel-ordonez/do-list/DataList'
 import ListItem from '@daniel-ordonez/do-list/ListItem'
 
 export default {
-    name: 'input-select',
+    name: 'input-combo',
     extends: InputTextBase,
     components: {DataList, ListItem},
     data: () => ({
@@ -64,6 +64,10 @@ export default {
         filteredSuggestions: []
     }),
     props: {
+        value: {
+            type: [String, Object], 
+            default: null
+        },
         options: {
             type: Array,
             default: () => []

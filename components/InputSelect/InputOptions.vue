@@ -17,6 +17,7 @@
 
 <script>
 export default {
+    name: 'input-options',
     props: {
         value: { 
             type: [Number, String], 
