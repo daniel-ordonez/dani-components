@@ -46,15 +46,27 @@ storiesOf('InputSelect', module)
   }))
   .add('combo box', () => ({
     components: { InputCombo },
-    template: `<input-combo 
-    label="Day of the week"
-    v-model="value" 
-    :options="items2" 
-    @input="onInput" 
-    style="${style}" />`,
+    template: `
+    <div style="display: flex; flex-direction: column;">
+      <input-combo 
+        label="Using string"
+        v-model="value" 
+        :options="items" 
+        @input="onInput" 
+        style="${style}" />
+      <input-combo 
+        label="Using objects"
+        v-model="value2" 
+        :options="items2" 
+        @input="onInput" 
+        style="${style}" />
+    </div>
+    `,
     data: () => ({
+        items,
         items2,
-        value: null
+        value: null,
+        value2: null
     }),
     methods: InputMethods
   }))

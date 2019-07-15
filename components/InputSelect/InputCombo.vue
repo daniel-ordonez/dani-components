@@ -123,7 +123,8 @@ export default {
             let {options, dataLabel} = this
             let suggestions = options.map(
                 item => typeof item === 'string'
-                ? item.match(new RegExp(`.*${filter}.*`))
+                ? item.match(new RegExp(`.*${filter}.*`)) 
+                && item
                 : typeof item === 'object'
                     ? typeof item[dataLabel] === 'string'
                     && item[dataLabel].match(new RegExp(`.*${filter}.*`))
@@ -131,6 +132,7 @@ export default {
                         : null
                     : null
             )
+            console.log(suggestions)
             cb && cb(suggestions)
         },
         updateSuggestions () {
