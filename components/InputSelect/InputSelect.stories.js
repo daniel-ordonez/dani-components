@@ -72,13 +72,27 @@ storiesOf('InputSelect', module)
   }))
   .add('few options', () => ({
     components: { InputOptions },
-    template: `<input-options 
-    label="Weekend days" 
-    :options="items" 
-    @input="onInput" 
-    style="${style}" />`,
+    template: `
+    <div style="display: flex; flex-direction: column;">
+      <input-options 
+        label="Weekend days - strings"
+        v-model="value" 
+        :options="items" 
+        @input="onInput" 
+        style="${style}" />
+      <input-options 
+        label="Weekend days - objects"
+        v-model="value2" 
+        :options="items2" 
+        @input="onInput" 
+        style="${style}" />
+    </div>
+    `,
     data: () => ({
-        items: ['Friday', 'Saturday', 'Sunday']
+        value: null,
+        items: items.slice(-3),
+        value2: null,
+        items2: items2.slice(-3)
     }),
     methods: InputMethods
   }))

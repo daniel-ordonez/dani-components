@@ -6,10 +6,10 @@
         <div class="input-options__wrapper">
             <button v-for="(item, index) in options" 
                 class="btn"
-                @click="select(item)"
+                @click="selected = item"
                 :selected="!!(item === selected)"
                 :key="index">
-                {{item | optionLabel(index)}}
+                {{item | optionLabel(dataLabel)}}
             </button>
         </div>
     </div>
@@ -20,37 +20,38 @@ export default {
     name: 'input-options',
     props: {
         value: { 
-            type: [Number, String], 
-            default: -1, 
+            type: [Object, String], 
+            default: null, 
         },
         label: { type: String, default: '' },
         id: { type: String, default: '' },
         options: {
             type: Array,
             default: () => []
+        },
+        dataLabel: {
+            type: String,
+            default: 'label'
         }
     },
     filters: {
-        optionLabel (item, index) {
+        optionLabel (item, dataLabel) {
             return typeof item === 'string'
             ? item
             : item && typeof item === 'object'
-                ? item[index]
+                ? item[dataLabel]
                 : ''
         }
     },
     data: () => ({
-        focused: false,
-        selected: null
+        focused: false
     }),
     computed: {
+        selected: {
+            get () { return this.value },
+            set (value) { this.$emit('input', value) }
+        },
         inputId () { return this.id.length ? this.id : `input__${this._uid}` },
-    },
-    methods: {
-        select (item) {
-            this.selected = item
-            this.$emit('input', item)
-        }
     }
 }
 </script>
