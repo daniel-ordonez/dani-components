@@ -1,5 +1,5 @@
 {
-    "name": "@daniel-ordonez/do-table",
+    "name": "@daniel-ordonez/do-ui",
     "version": "0.0.1",
     "publishConfig": {
         "access": "public"
