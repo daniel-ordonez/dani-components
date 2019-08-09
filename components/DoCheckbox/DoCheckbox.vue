@@ -1,6 +1,6 @@
 <template>
     <label class="do-checkbox">
-        <input type="checkbox" checked="checked">
+        <input type="checkbox" v-model="checked"  @input="e => {$emit('input', e)}">
         <span class="checkmark" >
             <i 
                 v-if="typeof icon === 'string'"
@@ -19,6 +19,18 @@ export default {
     props: {
         icon: { type: [String, Boolean], default: false },
         label: { type: String, default: '' }
+    },
+    data: () => ({
+        checked: false
+    }),
+    watch: {
+        checked (value) {
+            this.$emit('checked', value)
+        }
+    },
+    model: {
+        value: 'checked',
+        event: 'checked'
     }
 }
 </script>

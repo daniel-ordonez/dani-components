@@ -20,10 +20,11 @@
                     :class="{'selected': selectedItems.includes(item)}"
                 >
                     <td v-if="selection">
-                        <input type="checkbox" name="" id=""
+                        <do-checkbox
+                            class="round"
                             :checked="selectedItems.includes(item)"
                             @input="e => select(e, item)"
-                        >
+                        />
                     </td>
                     <td v-for="(k, i) in columns" 
                         :key="`col-${i}`" 
@@ -37,8 +38,10 @@
 </template>
 
 <script>
+import DoCheckbox from '@daniel-ordonez/do-checkbox/DoCheckbox'
 export default {
     name: 'do-table',
+    components: {DoCheckbox},
     props: {
         columns: {
             type: Array,

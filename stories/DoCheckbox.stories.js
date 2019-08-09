@@ -4,6 +4,11 @@ import DoLayout from '../components/UI/DoLayout'
 import DoCheckbox from '../components/DoCheckbox/DoCheckbox'
 import 'boxicons'
 
+
+export const InputMethods = {
+    onInput: action('input')
+  }
+
 storiesOf('Checkbox', module)
   .add('Checkbox', () => ({
     components: { DoCheckbox, DoLayout },
@@ -11,7 +16,8 @@ storiesOf('Checkbox', module)
     <do-layout class="flex-column flex-center-xy bg-color-app pa-a-l">
       <do-checkbox label="checkbox"/>
       <do-checkbox class="round" label="checkbox"/>
-      <do-checkbox label="checkbox" icon="check"/>
+      <do-checkbox label="checkbox" icon="check" @input="onInput"/>
     </do-layout>
-    `
+    `,
+    methods: InputMethods
   }))
