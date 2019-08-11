@@ -1,6 +1,6 @@
 {
     "name": "@daniel-ordonez/do-checkbox",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "publishConfig": {
         "access": "public"
     },

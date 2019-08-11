@@ -1,11 +1,11 @@
 {
     "name": "@daniel-ordonez/do-table",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "publishConfig": {
         "access": "public"
     },
     "gitHead": "461e0d862d9c5ec649a0d5333cddf4eba8b2a26b",
     "dependencies": {
-        "@daniel-ordonez/do-checkbox": "^0.0.3"
+        "@daniel-ordonez/do-checkbox": "^0.0.4"
     }
 }
