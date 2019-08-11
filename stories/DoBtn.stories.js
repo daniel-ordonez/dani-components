@@ -2,7 +2,7 @@ import { storiesOf } from '@storybook/vue'
 import { action } from '@storybook/addon-actions'
 import DoLayout from '../components/UI/DoLayout'
 import DoBtn from '../components/UI/DoBtn'
-import DoSelectBtn from '../components/UI/DoSelectBtn'
+import DoSelectBtn from '../components/DoSelect/DoSelectBtn'
 import 'boxicons'
 
 
