@@ -2,6 +2,7 @@ import { storiesOf } from '@storybook/vue'
 import { action } from '@storybook/addon-actions'
 import DoLayout from '../components/UI/DoLayout'
 import DoBtn from '../components/UI/DoBtn'
+import DoSelectBtn from '../components/UI/DoSelectBtn'
 import 'boxicons'
 
 
@@ -10,6 +11,32 @@ export const InputMethods = {
 }
 
 storiesOf('Button', module)
+.add('Select Button', () => ({
+  components: { DoSelectBtn, DoLayout },
+  template: `
+    <do-layout class="flex-center-xy pa-a-m">
+      <do-select-btn 
+        ripple
+        placeholder="Day of the week"
+        :options="dow"
+        :label-function="formatLabel"
+      >
+      </do-select-btn>
+    </do-layout>
+    `,
+    data: () => ({
+      dow: [
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+        'Sunday'
+      ],
+      formatLabel: v => `Day: ${v}`
+    })
+}))
   .add('Button', () => ({
     components: { DoBtn, DoLayout },
     template: `

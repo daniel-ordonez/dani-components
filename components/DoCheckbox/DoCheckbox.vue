@@ -18,18 +18,19 @@ export default {
     name: 'do-checkbox',
     props: {
         icon: { type: [String, Boolean], default: false },
-        label: { type: String, default: '' }
+        label: { type: String, default: '' },
+        value: { type: Boolean, default: false }
     },
-    data: () => ({
-        checked: false
-    }),
-    watch: {
-        checked (value) {
-            this.$emit('checked', value)
+    computed: {
+        checked: {
+            get () { return this.value },
+            set (value) {
+                this.$emit('checked', value)
+            }
         }
     },
     model: {
-        value: 'checked',
+        value: 'value',
         event: 'checked'
     }
 }
@@ -85,12 +86,12 @@ export default {
   border-color: var(--checkbox--checked--bg-color, var(--color--primary));
 }
 /* Create the checkmark/indicator (hidden when not checked) */
-.do-checkbox .checkmark>i {
-  display: none;
-}
 .do-checkbox input:checked ~ .checkmark>i {
   display: block;
   color: var(--checkbox--icon-color,  white);
+}
+.do-checkbox input:not(:checked) ~  .checkmark>i {
+  display: none;
 }
 .checkbox-label {
     color: var(--checkbox--label-color, var(--text-color, inherit));

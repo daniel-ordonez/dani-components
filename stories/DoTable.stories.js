@@ -2,6 +2,9 @@ import { storiesOf } from '@storybook/vue'
 import { action } from '@storybook/addon-actions'
 import DoLayout from '../components/UI/DoLayout'
 import DoTable from '../components/DoTable/DoTable'
+import DoBtn from '../components/UI/DoBtn'
+import DoTooltip from '../components/UI/DoTooltip'
+import DoPillmenu from '../components/UI/DoPillmenu'
 import 'boxicons'
 
 export const InputMethods = {
@@ -10,20 +13,33 @@ export const InputMethods = {
 
 storiesOf('Table', module)
   .add('Table', () => ({
-    components: { DoTable, DoLayout },
+    components: { DoTable, DoLayout, DoBtn, DoTooltip, DoPillmenu },
     template: `
     <do-layout class="flex-column flex-center-xy bg-color-app pa-a-l">
-      <do-table 
+      <do-table max-width="700px"
         :columns="columns" 
         :data="data" 
-        v-model="selected" 
-        selection="multiple"
+        v-model="selectedRows" 
         @select="onInput"
       >
       </do-table>
+      <do-tooltip arrow :target="selectedRow" position="left" ref="tooltip" style="--bg-color: var(--color--accent);">
+        <do-pillmenu >
+          <do-btn flat class="mono round accent">
+            <i class='bx bxs-pencil bx-sm'></i>
+          </do-btn>
+          <do-btn falt class="mono round accent">
+            <i class='bx bxs-copy bx-sm'></i>
+          </do-btn>
+          <do-btn flat class="mono round accent">
+            <i class='bx bxs-trash bx-sm'></i>
+          </do-btn>
+        </do-pillmenu>
+      </do-tooltip>
     </do-layout>
     `,
     data: () => ({
+        selectedRow: null,
         selected: [],
         columns: [
             { name: 'i', label: '#', align: 'center' },
@@ -90,7 +106,25 @@ storiesOf('Table', module)
         ]
     }),
     computed: {
-        data () { return this.items.map((v, i) => ({i: i + 1, ...v}))}
+        data () { return this.items.map((v, i) => ({i: i + 1, ...v}))},
+        selectedRows: {
+          get () { return this.selected },
+          set (value) {
+            this.selected = value
+            if (value && Array.isArray(value) && value.length) {
+              let el = value[0].el
+              this.selectedRow = el.querySelector('td')
+              this.$nextTick(() => {
+                let {tooltip} = this.$refs
+                tooltip && tooltip.show()
+              })
+            } else {
+              this.selectedRow = null
+              let {tooltip} = this.$refs
+              tooltip && tooltip.hide()
+            }
+          }
+        }
     },
     methods: {
       ...InputMethods,

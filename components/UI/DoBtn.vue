@@ -70,4 +70,7 @@ button.do-btn.mono {
 button.do-btn.round {
     border-radius: 50%;
 }
+button.do-btn[flat] {
+    box-shadow: none;
+}
 </style>

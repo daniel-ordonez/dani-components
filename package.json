@@ -16,6 +16,7 @@
   "dependencies": {
     "boxicons": "^2.0.2",
     "cloudinary-core": "^2.6.3",
+    "lodash.debounce": "^4.0.8",
     "lodash.throttle": "^4.1.1",
     "luxon": "^1.15.0",
     "vue": "^2.6.10"

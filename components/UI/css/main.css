@@ -109,4 +109,14 @@ LAYOUT
     justify-content: center;
     align-items: center;
 }
+.grid-app {
+    display: grid;
+    grid-template-areas: "top top"
+    "side mid"
+    "side bottom";
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr auto;
+    height: 100vh;
+    width: 100vw;
+}
 

@@ -125,6 +125,9 @@
     /* table */
     --table--bg-color: white;
     --table--row--border-radius: 4px;
+
+
+    --sidenav--bg-color: white;
 }
 
 
@@ -251,5 +254,13 @@ button.do-btn.secondary {
 }
 .bg-color-grey {
     --bg-color: var(--color--grey);
+    background-color: var(--bg-color);
+}
+.bg-color-accent {
+    --bg-color: var(--color--accent);
+    background-color: var(--bg-color);
+}
+.bg-color-white {
+    --bg-color: white;
     background-color: var(--bg-color);
 }

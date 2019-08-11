@@ -21,9 +21,10 @@
                 >
                     <td v-if="selection">
                         <do-checkbox
+                            icon="check"
                             class="round"
-                            :checked="selectedItems.includes(item)"
-                            @input="e => select(e, item)"
+                            :value="selectedItems.includes(item)"
+                            @input="e => select(index, item)"
                         />
                     </td>
                     <td v-for="(k, i) in columns" 
@@ -61,7 +62,10 @@ export default {
             default: 'single',
             validator: v => ['single', 'multiple'].includes(v)
         },
-        
+        maxWidth: {
+            type: String,
+            default: ''
+        }
     },
     model: {
         prop: 'selected',
@@ -79,9 +83,10 @@ export default {
         this.updateColumns()
     },
     methods: {
-        select (event, item) {
+        select (idx, item) {
             let {selection, selected} = this
             let uncheck = selected.find(el => el.item === item)
+            let el = this.$el.querySelector(`.table-row[row="${idx}"]`)
             if (uncheck) {
                 // remove from selected
                 let array = [...selected]
@@ -89,7 +94,9 @@ export default {
                 this.$emit('select', array)
             } else {
                 // append to selected
-                this.$emit('select', selection === 'multiple' ? [...selected, {event, item}] : [{event, item}])
+                let obj = {el, item}
+                let value = selection === 'multiple' ? [...selected, obj] : [obj]
+                this.$emit('select', value)
             }
         },
         updateColumns () {
@@ -100,7 +107,8 @@ export default {
                     return `${str} ${size}`
                 }
             }, '')
-            let style = `grid-template-columns: ${selected ? 'auto' : ''} ${templateColumns}`
+            let style = `grid-template-columns: ${selected ? 'auto' : ''} ${templateColumns}; 
+                ${this.maxWidth && 'max-width: ' + this.maxWidth}`
             this.$el.style = style
         }
     }
@@ -113,13 +121,15 @@ export default {
     display: grid;
     border-collapse: collapse;
     grid-row-gap: var(--padding-s);
-    min-width: 100%;
     --table--row--border-width: 2px;
 }
 .do-table thead,
 .do-table tbody,
 .do-table tr {
     display: contents;
+    --checkbox--hover--bg-color: var(--color--grey);
+    --checkbox--checked--bg-color: white;
+    --checkbox--icon-color: var(--table--selected--bg-color, var(--color--primary));
 }
 .do-table th {
     padding: var(--padding-s);
@@ -150,7 +160,7 @@ export default {
     border-right: var(--table--row--border-width) solid var(--table--row--border-color, transparent);
 }
 .do-table tr.selected>td {
-    --table--bg-color: var(--color--primary);
+    --table--bg-color: var(--table--selected--bg-color, var(--color--primary));
     --table--text-color: white;
 }
 .do-table tr.selected>td{

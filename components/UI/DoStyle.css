@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css?family=Rubik');
+/*
+@import url('https://unicons.iconscout.com/release/v0.0.4/css/unicons.css');
+*/
+@import url('https://cdn.jsdelivr.net/npm/boxicons@2.0.2/css/boxicons.min.css');
+@import './css/Vars.css';
+/* @import './Button.css'; */
+/*
+@import './Transitions.css';
+@import './Input.css';
+@import './Card.css';
+@import './Skeleton.css';
+*/
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    cursor: pointer;
+    text-decoration: none;
+    font-size: inherit;
+    font-family: inherit;
+}
+a:hover {
+    --color-text: var(--color-primary);
+    --stroke: var(--color-text);
+    color: var(--color-text);
+}
+svg {
+    stroke: var(--stroke, --color-bg--contrast, black);
+}
+*{
+    box-sizing: border-box;
+}
+.no-break {
+    white-space: nowrap;
+}
+img.responsive {
+    width: 100%;
+    height: auto;
+    margin:auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: var(--padding-s);
+}
+
+/*
+PADDING
+*/
+.pa-a-0 {
+    padding: 0 !important;
+}
+.pa-a-m {
+    padding: var(--padding-m);
+}
+.pa-a-s {
+    padding: var(--padding-s);
+}
+.pa-a-l {
+    padding: var(--padding-l);
+}
+
+/*
+LAYOUT
+*/
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.flex-column>*:not(:only-child) {
+    margin-bottom: var(--padding-m);
+}
+.flex-row>*:not(:only-child):not(:last-child) {
+    margin-right: var(--padding-m);
+    margin-bottom: var(--padding-s);
+}
+.flex-wrap {
+    flex-wrap: wrap;
+}
+.flex-break {
+  flex-basis: 100%;
+  height: 0;
+  margin: 0px !important;
+}
+
+.grid-row {
+    display: grid;
+    grid-auto-flow: row;
+    grid-gap: var(--padding-m);
+}
+.grid-column {
+    display: grid;
+    grid-auto-flow: column;
+    grid-gap: var(--padding-m);
+}
+.grid-auto-fill {
+    display: grid;    
+    grid-template-columns: repeat(auto-fill, minmax(var(--min-col-w, 100px), var(--max-col-w, 1fr)));
+    grid-gap: var(--padding-m);
+}
+.flex-center-xy {
+    justify-content: center;
+    align-items: center;
+}
+.grid-app {
+    display: grid;
+    grid-template-areas: "top top"
+    "side mid"
+    "side bottom";
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr auto;
+    height: 100vh;
+    width: 100vw;
+}
+
