@@ -42,7 +42,7 @@ import DoInputTextBase from './DoInputTextBase'
     --input--height: calc(1em + (var(--padding-s) * 2));
 }
 .do-input[focus] .input-label{
-    color: var(--input--focus--border-color, var(--color--primary));
+    color: var(--input--focus--label-color, var(--color--primary));
 }
 .input-label {
     line-height: 1;
@@ -63,7 +63,7 @@ import DoInputTextBase from './DoInputTextBase'
 }
 .do-input-text {
     border-radius: var(--input--border-radius);
-    background-color: var(--input--bg-color, var(--color--grey-l2));
+    background-color: var(--input--bg-color, var(--color--grey));
     border: 1px solid transparent;
     transition: background-color .2s;
     display: flex;

@@ -38,6 +38,7 @@ export default {
 .do-sidenav .sidenav-content, .do-sidenav .sidenav-bottom, .do-sidenav .sidenav-top {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
 }
 </style>

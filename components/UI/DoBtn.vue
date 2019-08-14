@@ -27,12 +27,16 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: auto;
 }
 
 button.do-btn {
     padding: var(--padding-s) var(--padding-m);
     min-width: 100px;
     box-shadow: 0px 3px 6px -1px var(--button--shadow-color, rgba(0,0,0,.16));
+}
+button.do-btn * {
+    line-height: 1;
 }
 button.do-btn[text] {
     box-shadow: none;

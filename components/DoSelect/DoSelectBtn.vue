@@ -8,30 +8,24 @@
         <i class='bx bx-sm' :class="active ? 'bx-x' : 'bx-chevron-down'"></i>
         <div class="select-options">
             <do-list align="right">
-                <template v-if="options.length" >
+                <template v-if="items.length" >
                     <do-list-item 
                         :key="`options-${0}`"
-                        @click="select(options[0])"
+                        @click="select(items[0])"
+                        :selected="items[0] === value"
                     >
                         <div class="tip-arrow"></div>
                         <div class="list-item-section">
-                            {{
-                                typeof options[0] === 'string'
-                                ? options[0]
-                                : {...options[0]}.value
-                            }}
+                            {{items[0].label}}
                         </div>
                     </do-list-item>
-                    <do-list-item v-for="(item, index) in options.filter((el, idx) => idx > 0)" 
+                    <do-list-item v-for="(item, index) in items.filter((el, idx) => idx > 0)" 
                         :key="`options-${index + 1}`"
                         @click="select(item)"
+                        :selected="item === value"
                     >
                         <div class="list-item-section">
-                            {{
-                                typeof item === 'string'
-                                ? item
-                                : {item}.value
-                            }}
+                            {{item.label}}
                         </div>
                     </do-list-item>
                 </template>
@@ -46,7 +40,7 @@ export default {
     name: 'do-select-btn',
     components: {DoList, DoListItem},
     props: {
-        value: {type: [Object, String], default: null},
+        value: {type: Object, default: null},
         formatLabel: {
             type: [Function, Boolean],
             default: false
@@ -61,16 +55,19 @@ export default {
         active: false
     }),
     computed: {
+        items () {
+            return this.options.map(i => {
+                return typeof i === 'string'
+                ? {label: i, value: i}
+                : i
+            })
+        },
         label () {
             let {value, formatLabel, placeholder} = this
             if (value) {
-                return typeof value === 'string'
-                    ? typeof formatLabel === 'function'
-                        ? formatLabel(value)
-                        : value
-                    : typeof formatLabel === 'function'
-                        ? formatLabel(value.label || '')
-                        : value.label || ''
+                return typeof formatLabel === 'function'
+                    ? formatLabel(value.label)
+                    : value.label
             } else return placeholder
         }
     },
@@ -81,6 +78,7 @@ export default {
         },
         select (item) {
             this.$emit('input', item)
+            this.$emit('value-selected', item.value)
         }
     }
 }
@@ -125,7 +123,6 @@ button.do-btn>*+i {
     transform: rotate3d(0, 0, 1, -180deg);
 }
 .do-select-btn .select-options .do-list {
-    max-height: 200px;
     overflow-y: auto;
 }
 ::-webkit-scrollbar {
