@@ -147,7 +147,9 @@ export default {
     margin-bottom: 0;
     border-bottom: var(--table--row--border-width) solid var(--table--row--border-color, transparent);
     border-top: var(--table--row--border-width) solid var(--table--row--border-color, transparent);
+    /*
     transition: transform .3s;
+    */
 }
 .do-table tr>td:first-child {
     border-top-left-radius: var(--table--row--border-radius);
@@ -163,7 +165,9 @@ export default {
     --table--bg-color: var(--table--selected--bg-color, var(--color--primary));
     --table--text-color: white;
 }
+/*
 .do-table tr.selected>td{
     transform: translateX(var(--padding-s));
 }
+*/
 </style>

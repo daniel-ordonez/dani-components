@@ -77,21 +77,28 @@ export default {
 }
 /* On mouse-over, add a grey background color */
 .do-checkbox:hover input ~ .checkmark {
-  background-color: var(--checkbox--hover--bg-color, var(--color--grey-d1));
+    background-color: var(--checkbox--hover--bg-color, var(--color--grey-d1));
+    will-change: transform, background-color;
+    transition: all .15s ease-out;
 }
 
 /* When the checkbox is checked, add a blue background */
 .do-checkbox input:checked ~ .checkmark {
   background-color: var(--checkbox--checked--bg-color, var(--color--primary));
   border-color: var(--checkbox--checked--bg-color, var(--color--primary));
+  transform: scale(.8);
 }
 /* Create the checkmark/indicator (hidden when not checked) */
+.do-checkbox input ~ .checkmark>i {
+    transition: all .2s;
+    will-change: opacity;
+}
 .do-checkbox input:checked ~ .checkmark>i {
-  display: block;
-  color: var(--checkbox--icon-color,  white);
+    opacity: 1;
+    color: var(--checkbox--icon-color,  white);
 }
 .do-checkbox input:not(:checked) ~  .checkmark>i {
-  display: none;
+    opacity: 0;
 }
 .checkbox-label {
     color: var(--checkbox--label-color, var(--text-color, inherit));

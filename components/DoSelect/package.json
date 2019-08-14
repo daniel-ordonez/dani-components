@@ -3,5 +3,8 @@
     "version": "0.0.1",
     "publishConfig": {
         "access": "public"
+    },
+    "dependencies": {
+        "@daniel-ordonez/do-list": "^0.0.1"
     }
 }

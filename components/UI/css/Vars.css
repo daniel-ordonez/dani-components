@@ -126,8 +126,12 @@
     --table--bg-color: white;
     --table--row--border-radius: 4px;
 
-
+    /* sidenav */
     --sidenav--bg-color: white;
+
+    /* list item */
+    --litem--bg-color: var(--color--grey);
+    --litem--hover--bg-color: var(--color--grey-d1);
 }
 
 

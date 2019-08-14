@@ -116,7 +116,7 @@ LAYOUT
     "side bottom";
     grid-template-columns: auto 1fr;
     grid-template-rows: auto 1fr auto;
-    height: 100vh;
-    width: 100vw;
+    height: var(--grid-app--height, 100vh);
+    width: var(--grid-app--width, 100vw);
 }
 

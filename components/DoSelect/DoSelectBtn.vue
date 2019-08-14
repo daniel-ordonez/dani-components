@@ -5,17 +5,46 @@
         <div class="select-btn-label">
             {{label}}
         </div>
-        <i class='bx bx-chevron-down bx-sm'></i>
+        <i class='bx bx-sm' :class="active ? 'bx-x' : 'bx-chevron-down'"></i>
         <div class="select-options">
-            <div v-for="(item, index) in options" :key="`options-${index}`">
-                {{item}}
-            </div>
+            <do-list align="right">
+                <template v-if="options.length" >
+                    <do-list-item 
+                        :key="`options-${0}`"
+                        @click="select(options[0])"
+                    >
+                        <div class="tip-arrow"></div>
+                        <div class="list-item-section">
+                            {{
+                                typeof options[0] === 'string'
+                                ? options[0]
+                                : {...options[0]}.value
+                            }}
+                        </div>
+                    </do-list-item>
+                    <do-list-item v-for="(item, index) in options.filter((el, idx) => idx > 0)" 
+                        :key="`options-${index + 1}`"
+                        @click="select(item)"
+                    >
+                        <div class="list-item-section">
+                            {{
+                                typeof item === 'string'
+                                ? item
+                                : {item}.value
+                            }}
+                        </div>
+                    </do-list-item>
+                </template>
+            </do-list>
         </div>
     </button>
 </template>
 <script>
+import DoList from '@daniel-ordonez/do-list/DoList'
+import DoListItem from '@daniel-ordonez/do-list/DoListItem'
 export default {
     name: 'do-select-btn',
+    components: {DoList, DoListItem},
     props: {
         value: {type: [Object, String], default: null},
         formatLabel: {
@@ -49,6 +78,9 @@ export default {
         toggle (event) {
             this.$emit('click', event)
             this.active = !this.active
+        },
+        select (item) {
+            this.$emit('input', item)
         }
     }
 }
@@ -56,19 +88,24 @@ export default {
 <style>
 .do-select-btn {
     position: relative;
+    --arrow-size: var(--padding-s, 8px);
+}
+.do-select-btn[active] {
+    z-index: 10000;
 }
 button.do-btn>*+i {
     margin-left: var(--padding-s);
 }
 .do-select-btn .select-options {
     position: absolute;
-    top: calc(100% );
+    top: 100%;
     min-width: 100%;
     opacity: 0;
     display: flex;
     flex-direction: column;
     background-color: var(--button--bg-color, var(--bg-color, white));
     border-radius: var(--button--border-radius);
+    --list--border-radius: var(--button--border-radius);
     box-shadow: 0px 3px 6px -1px var(--button--shadow-color, rgba(0,0,0,.16));
     will-change: top, opacity;
     transition: all .2s ease-in-out;
@@ -78,8 +115,50 @@ button.do-btn>*+i {
     opacity: 1;
     top: calc(100% + var(--padding-s));
     pointer-events: initial;
+    z-index: 1;
 }
-.do-select-btn[active] {
-    pointer-events: none;
+.do-select-btn>i {
+    transform: rotate3d(0,0,0);
+    transition: transform .3s;
+}
+.do-select-btn[active]>i {
+    transform: rotate3d(0, 0, 1, -180deg);
+}
+.do-select-btn .select-options .do-list {
+    max-height: 200px;
+    overflow-y: auto;
+}
+::-webkit-scrollbar {
+    display: none;
+    opacity: 0;
+    width: 0;
+}
+.do-list-item .tip-arrow {
+    z-index: 10000;
+    content: " ";
+    position: absolute;
+    bottom: calc(100% - 2px);
+    right: var(--padding-m);
+    margin-left: calc(var(--arrow-size) * -1);
+    border-width: var(--arrow-size);
+    border-style: solid;
+    border-color: transparent 
+    transparent 
+    var(--litem--bg-color, var(--button--bg-color, var(--bg-color))) 
+    transparent;
+}
+.do-list-item:hover .tip-arrow {
+    z-index: 10000;
+    content: " ";
+    position: absolute;
+    bottom: calc(100% - 2px);
+    right: var(--padding-m);
+    margin-left: calc(var(--arrow-size) * -1);
+    border-width: var(--arrow-size);
+    border-style: solid;
+    border-color: transparent 
+    transparent 
+    var(--litem--hover--bg-color, var(--button--bg-color, var(--bg-color))) 
+    transparent;
 }
 </style>

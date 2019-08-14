@@ -43,7 +43,7 @@ button.do-btn[ripple] {
     white-space: nowrap;
 }
 button.do-btn[ripple]:hover:not(:disabled) {
-    background: var(--button--hover--bg-color) 
+    background: var(--button--hover--bg-color)
     radial-gradient(circle, transparent 1%, var(--button--hover--bg-color) 1%) center/15000%;
 }
 button.do-btn[ripple]:active:not(:disabled) {
@@ -62,9 +62,9 @@ button.do-btn[text] {
     --button--bg-color: var(--button-text--bg-color);
 }
 button.do-btn.mono {
-    min-width: 2.5em;
-    width: 2.5em;
-    height: 2.5em;
+    min-width: var(--button--mono--size, 2.5em);
+    width: var(--button--mono--size, 2.5em);
+    height: var(--button--mono--size, 2.5em);
     padding: 0;
 }
 button.do-btn.round {

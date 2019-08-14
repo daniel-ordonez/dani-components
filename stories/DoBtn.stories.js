@@ -14,18 +14,21 @@ storiesOf('Button', module)
 .add('Select Button', () => ({
   components: { DoSelectBtn, DoLayout },
   template: `
-    <do-layout class="flex-center-xy pa-a-m">
+    <do-layout class="flex-column flex-center-xy pa-a-m">
       <do-select-btn 
         ripple
-        placeholder="Day of the week"
-        :options="dow"
-        :label-function="formatLabel"
+        placeholder="Days of the week"
+        :options="dows"
+        :format-label="formatLabel"
+        v-model="dayOfTheWeek"
+        @input="onInput"
       >
       </do-select-btn>
     </do-layout>
     `,
     data: () => ({
-      dow: [
+      dayOfTheWeek: null,
+      dows: [
         'Monday',
         'Tuesday',
         'Wednesday',
@@ -35,7 +38,10 @@ storiesOf('Button', module)
         'Sunday'
       ],
       formatLabel: v => `Day: ${v}`
-    })
+    }),
+    methods: {
+      ...InputMethods
+    }
 }))
   .add('Button', () => ({
     components: { DoBtn, DoLayout },
