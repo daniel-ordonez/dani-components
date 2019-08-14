@@ -57,9 +57,9 @@ export default {
     computed: {
         items () {
             return this.options.map(i => {
-                return typeof i === 'string'
-                ? {label: i, value: i}
-                : i
+                return typeof i === 'object' && {...i}.value
+                ? i
+                : {label: i, value: i}
             })
         },
         label () {
