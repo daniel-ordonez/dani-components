@@ -34,23 +34,27 @@ export default {
         }
     },
     mounted () {
-        const f = debounce(() => {this.updatePosition()}, 300)
+        const f = debounce(() => {this.updatePosition()}, 100)
         this.f = f
         
-        let rc = this.resizeContainer
-        let resizeContainer = rc.length ? document.querySelector(rc) : window
-        resizeContainer.addEventListener("resize", f)
-        this.rc = resizeContainer
-
-        let sc = this.scrollContainer
-        let scrollContainer = sc.length ? document.querySelector(sc) : window
-        scrollContainer.addEventListener("scroll", f)
-        this.sc = scrollContainer
+        let {resizeContainer, scrollContainer} = this
+        if (resizeContainer) {
+            resizeContainer.addEventListener("resize", f)
+            this.rc = resizeContainer
+        }
+        if (scrollContainer) {
+            scrollContainer.addEventListener("scroll", f)
+            this.sc = scrollContainer
+        }
+        window.addEventListener("resize", f)
+        window.addEventListener("scroll", f)
     },
     beforeDestroy () {
         const {f, sc, rc} = this.$data
         rc && rc.removeEventListener("resize", f)
         sc && sc.removeEventListener("scroll", f)
+        window.removeEventListener("resize", f)
+        window.removeEventListener("scroll", f)
     },
     methods: {
         show () {

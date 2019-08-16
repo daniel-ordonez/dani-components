@@ -175,11 +175,12 @@ export default {
     --table--text-color: white;
 }
 
-.do-table[sticky-selected] tbody>tr.selected>td{
+.do-table[sticky-selected] tbody tr.selected>td{
     position: sticky;
     top: 0;
+    bottom: 0;
 }
-.do-table[sticky-head][sticky-selected] tbody>tr.selected>td{
+.do-table[sticky-head][sticky-selected] tbody tr.selected>td{
     position: sticky;
     top: calc(1em + (2 * var(--padding-s)));
 }
