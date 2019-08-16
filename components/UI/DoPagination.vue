@@ -48,7 +48,6 @@
         methods: {
             updateButtons () {
                 let {pages, limit, activePage} = this
-                console.log({pages, limit, activePage})
                 if (pages > limit) { //overflow
                     let firstLimit = Math.floor(limit / 2)
                     let lastLimit = pages - firstLimit + 1
