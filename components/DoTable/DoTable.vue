@@ -1,7 +1,7 @@
 <template>
-    <table class="do-table">
+    <table class="do-table" :sticky-head="stickyHead" :sticky-selected="stickySelected">
         <slot name="head">
-            <thead :sticky="sticky">
+            <thead>
                 <th v-if="selection !== 'none'"/>
                 <th v-for="(item, index) in columns" 
                     :key="`th-${index}`"
@@ -64,7 +64,8 @@ export default {
             validator: v => ['none','single', 'multiple'].includes(v)
         },
         maxWidth: {type: String,default: ''},
-        sticky: { type: Boolean, default: true}
+        stickyHead: { type: Boolean, default: true},
+        stickySelected: { type: Boolean, default: false}
     },
     model: {
         prop: 'selected',
@@ -133,10 +134,11 @@ export default {
     --checkbox--checked--bg-color: white;
     --checkbox--icon-color: var(--table--selected--bg-color, var(--color--primary));
 }
-.do-table thead[sticky] th {
+.do-table[sticky-head] thead>th {
     position: sticky;
     top: 0;
     background: var(--table--header--bg-color, var(--bg-color));
+    z-index: 100;
 }
 .do-table th {
     padding: var(--padding-s);
@@ -172,9 +174,13 @@ export default {
     --table--bg-color: var(--table--selected--bg-color, var(--color--primary));
     --table--text-color: white;
 }
-/*
-.do-table tr.selected>td{
-    transform: translateX(var(--padding-s));
+
+.do-table[sticky-selected] tbody>tr.selected>td{
+    position: sticky;
+    top: 0;
 }
-*/
+.do-table[sticky-head][sticky-selected] tbody>tr.selected>td{
+    position: sticky;
+    top: calc(1em + (2 * var(--padding-s)));
+}
 </style>
