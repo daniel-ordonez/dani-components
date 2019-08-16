@@ -1,10 +1,10 @@
 {
     "name": "@daniel-ordonez/do-select",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "publishConfig": {
         "access": "public"
     },
     "dependencies": {
-        "@daniel-ordonez/do-list": "^0.0.2"
+        "@daniel-ordonez/do-list": "^0.0.3"
     }
 }
