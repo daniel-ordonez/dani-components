@@ -19,30 +19,38 @@ export default {
             default: 'B', 
             validator: s => ['top', 'bottom', 'left', 'right'].includes(s) 
         },
-        container: {
-            type: [Node, Object], default: null
-        }
+        resizeContainer: { type: String, default: '' },
+        scrollContainer: { type: String, default: '' }
     },
     data: () => ({
         visible: false,
-        f: null
+        f: null,
+        sc: null,
+        rc: null
     }),
     watch: {
         target (target) {
             if (!(target instanceof Node)) return this.hide()
         }
     },
-    created () {
+    mounted () {
         const f = debounce(() => {this.updatePosition()}, 300)
-        const c = this.container ? this.container : window
-        window.addEventListener("resize", f)
-        c.addEventListener("scroll", f)
         this.f = f
+        
+        let rc = this.resizeContainer
+        let resizeContainer = rc.left ? document.querySelector(rc) : window
+        rc.addEventListener("resize", f)
+        this.rc = rc
+
+        let sc = this.scrollContainer
+        let scrollContainer = sc.left ? document.querySelector(sc) : window
+        scrollContainer.addEventListener("scroll", f)
+        this.sc = scrollContainer
     },
     beforeDestroy () {
-        const {f} = this.$data
-        window.addEventListener("resize", f)
-        window.addEventListener("scroll", f)
+        const {f, sc, rc} = this.$data
+        rc.removeEventListener("resize", f)
+        sc.removeEventListener("scroll", f)
     },
     methods: {
         show () {
