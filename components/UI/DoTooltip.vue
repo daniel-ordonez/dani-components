@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import ResizeObserver from 'resize-observer-polyfill'
 const debounce = require('lodash.debounce')
 export default {
     name: 'do-tooltip',
@@ -26,7 +27,8 @@ export default {
         visible: false,
         f: null,
         sc: null,
-        rc: null
+        rc: null,
+        ro: null
     }),
     watch: {
         target (target) {
@@ -39,8 +41,12 @@ export default {
         let {resizeContainer, scrollContainer} = this
         if (resizeContainer.length) {
             let rc = document.querySelector(resizeContainer)
-            rc && rc.addEventListener("resize", f)
-            this.rc = rc
+            if (rc) {
+                const ro = new ResizeObserver(f)
+                ro.observe(rc)
+                this.rc = rc
+                this.ro = ro
+            }
         }
         if (scrollContainer.length) {
             let sc = document.querySelector(scrollContainer)
@@ -51,8 +57,8 @@ export default {
         window.addEventListener("scroll", f)
     },
     beforeDestroy () {
-        const {f, sc, rc} = this.$data
-        rc && rc.removeEventListener("resize", f)
+        const {f, sc, rc, ro} = this.$data
+        ro && ro.unobserve(rc)
         sc && sc.removeEventListener("scroll", f)
         window.removeEventListener("resize", f)
         window.removeEventListener("scroll", f)

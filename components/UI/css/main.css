@@ -54,13 +54,48 @@ PADDING
 .pa-a-m {
     padding: var(--padding-m);
 }
+.pa-t-m {
+    padding-top: var(--padding-m);
+}
+.pa-b-m {
+    padding-bottom: var(--padding-m);
+}
+.pa-l-m {
+    padding-left: var(--padding-m);
+}
+.pa-r-m {
+    padding-right: var(--padding-m);
+}
 .pa-a-s {
     padding: var(--padding-s);
+}
+.pa-t-s {
+    padding-top: var(--padding-s);
+}
+.pa-b-s {
+    padding-bottom: var(--padding-s);
+}
+.pa-l-s {
+    padding-left: var(--padding-s);
+}
+.pa-r-s {
+    padding-right: var(--padding-s);
 }
 .pa-a-l {
     padding: var(--padding-l);
 }
-
+.pa-t-l {
+    padding-top: var(--padding-l);
+}
+.pa-b-l {
+    padding-bottom: var(--padding-l);
+}
+.pa-l-l {
+    padding-left: var(--padding-l);
+}
+.pa-r-l {
+    padding-right: var(--padding-l);
+}
 /*
 LAYOUT
 */
