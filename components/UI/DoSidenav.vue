@@ -27,7 +27,8 @@ export default {
     grid-auto-flow: row;
     background-color: var(--sidenav--bg-color, var(--bg-color));
     height: 100%;
-    width: calc(2.5em + (2 * var(--padding-s, 1em)));
+    --sidenav--falback--width: calc(2.5em + (2 * var(--padding-s, 1em)));
+    width: var(--sidenav--mini--width, var(--sidenav--falback--width));
 }
 .do-sidenav .sidenav-top {
     padding-top: var(--sidenav--padding-top, var(--padding-m));
@@ -39,6 +40,5 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
 }
 </style>
