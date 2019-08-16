@@ -38,19 +38,19 @@ export default {
         this.f = f
         
         let rc = this.resizeContainer
-        let resizeContainer = rc.left ? document.querySelector(rc) : window
-        rc.addEventListener("resize", f)
-        this.rc = rc
+        let resizeContainer = rc.length ? document.querySelector(rc) : window
+        resizeContainer.addEventListener("resize", f)
+        this.rc = resizeContainer
 
         let sc = this.scrollContainer
-        let scrollContainer = sc.left ? document.querySelector(sc) : window
+        let scrollContainer = sc.length ? document.querySelector(sc) : window
         scrollContainer.addEventListener("scroll", f)
         this.sc = scrollContainer
     },
     beforeDestroy () {
         const {f, sc, rc} = this.$data
-        rc.removeEventListener("resize", f)
-        sc.removeEventListener("scroll", f)
+        rc && rc.removeEventListener("resize", f)
+        sc && sc.removeEventListener("scroll", f)
     },
     methods: {
         show () {
