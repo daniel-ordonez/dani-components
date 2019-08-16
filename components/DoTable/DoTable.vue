@@ -2,7 +2,7 @@
     <table class="do-table">
         <slot name="head">
             <thead>
-                <th v-if="selection"/>
+                <th v-if="selection !== 'none'"/>
                 <th v-for="(item, index) in columns" 
                     :key="`th-${index}`"
                     :align="item.align || 'left'"
@@ -19,7 +19,7 @@
                     :row="index"
                     :class="{'selected': selectedItems.includes(item)}"
                 >
-                    <td v-if="selection">
+                    <td v-if="selection !== 'none'">
                         <do-checkbox
                             icon="check"
                             class="round"
@@ -60,7 +60,7 @@ export default {
         selection: {
             type: String,
             default: 'single',
-            validator: v => ['single', 'multiple'].includes(v)
+            validator: v => ['none','single', 'multiple'].includes(v)
         },
         maxWidth: {
             type: String,
@@ -88,7 +88,7 @@ export default {
     methods: {
         select (idx, item) {
             let {selection, selected} = this
-            let uncheck = selected.find(el => el.item === item)
+            let uncheck = [...selected].find(el => el.item === item)
             let el = this.$el.querySelector(`.table-row[row="${idx}"]`)
             if (uncheck) {
                 // remove from selected
@@ -103,14 +103,14 @@ export default {
             }
         },
         updateColumns () {
-            let {columns, selected} = this
+            let {columns, selection} = this
             let templateColumns = columns.reduce((str, col) => {
                 let size = col.size || 'auto'
                 if (['auto', '1fr'].includes(size) || size.match(/^\d+(px)$/) || size.match(/^(minmax\().+,.+\)$/)) {
                     return `${str} ${size}`
                 }
             }, '')
-            let style = `grid-template-columns: ${selected ? 'auto' : ''} ${templateColumns}; 
+            let style = `grid-template-columns: ${selection !== 'none' ? 'auto' : ''} ${templateColumns}; 
                 ${this.maxWidth && 'max-width: ' + this.maxWidth}`
             this.$el.style = style
         }
