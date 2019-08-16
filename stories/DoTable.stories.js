@@ -23,7 +23,12 @@ storiesOf('Table', module)
         @select="onInput"
       >
       </do-table>
-      <do-tooltip arrow :target="selectedRow" position="left" ref="tooltip" style="--bg-color: var(--color--accent);">
+      <do-tooltip arrow 
+        :target="selectedRow" 
+        position="left" 
+        ref="tooltip" 
+        style="--bg-color: var(--color--accent);"
+      >
         <do-pillmenu >
           <do-btn flat class="mono round accent">
             <i class='bx bxs-pencil bx-sm'></i>
@@ -113,6 +118,7 @@ storiesOf('Table', module)
             this.selected = value
             if (value && Array.isArray(value) && value.length) {
               let el = value[0].el
+              console.log('el', el)
               this.selectedRow = el.querySelector('td')
               this.$nextTick(() => {
                 let {tooltip} = this.$refs

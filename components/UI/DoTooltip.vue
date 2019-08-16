@@ -18,6 +18,9 @@ export default {
             type: String, 
             default: 'B', 
             validator: s => ['top', 'bottom', 'left', 'right'].includes(s) 
+        },
+        container: {
+            type: [Node, Object], default: null
         }
     },
     data: () => ({
@@ -31,8 +34,9 @@ export default {
     },
     created () {
         const f = debounce(() => {this.updatePosition()}, 300)
+        const c = this.container ? this.container : window
         window.addEventListener("resize", f)
-        window.addEventListener("scroll", f)
+        c.addEventListener("scroll", f)
         this.f = f
     },
     beforeDestroy () {
@@ -54,16 +58,14 @@ export default {
             if (!visible) return
             let {position, target} = this
             let el = this.$el
-            let selfRect = el.getBoundingClientRect()
             let targetRect = target.getBoundingClientRect()
-            console.log(targetRect)
             switch (position) {
-                case 'left': this.placeLeft(selfRect, targetRect, el)
+                case 'left': this.placeLeft(targetRect, el)
                 break;
             }
         },
-        placeLeft (r1, r2, el) {
-            let {top, bottom, left, width, height} = r2
+        placeLeft (targetRect, el) {
+            let {top, bottom, left, width, height} = targetRect
             let y = top + (height / 2)
             let x = left
             let padding = '1em'

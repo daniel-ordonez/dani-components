@@ -33,6 +33,7 @@ export default {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 .list-item-section {
     padding: 0 var(--padding-s);
