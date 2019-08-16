@@ -27,7 +27,6 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: auto;
 }
 
 button.do-btn {

@@ -33,14 +33,23 @@
     --color--grey-l2: #f2f2f2;
     --color--grey-l3: #fafafa;
 
-    /*
-    --color--primary: #2d53fe;
+    
+    --color--primary: #2e54fd;
     --color--primary-d1: #2442cb;
     --color--primary-d2: #1b3298;
     --color--primary-d3: #122166;
     --color--primary-l1: #5775fe;
     --color--primary-l2: #8198fe;
     --color--primary-l3: #c0cbff;
+
+    /*
+        --color--primary: rgb(17, 187, 255);
+    --color--primary-d1: #0fa8e6;
+    --color--primary-d2: #0c83b3;
+    --color--primary-d3: #095e80;
+    --color--primary-l1: #41c9ff;
+    --color--primary-l2: #70d6ff;
+    --color--primary-l3: #b8ebff;
     */
 
     
@@ -68,14 +77,6 @@
     --color--info-l1: #70dfd9;
     --color--info-l2: #94e7e3;
     --color--info-l3: #c9f3f1;
-
-    --color--primary: rgb(17, 187, 255);
-    --color--primary-d1: #0fa8e6;
-    --color--primary-d2: #0c83b3;
-    --color--primary-d3: #095e80;
-    --color--primary-l1: #41c9ff;
-    --color--primary-l2: #70d6ff;
-    --color--primary-l3: #b8ebff;
 
     --color--secondary: #1dd097;
     --color--secondary-d1: #17a679;
@@ -161,7 +162,7 @@ button.do-btn.primary {
     --button--hover--bg-color: var(--color--primary-d1);
     --button--active--bg-color: var(--color--primary-l2);
     --button--text-color: white;
-    --button--shadow-color: rgba(17, 187, 255, 0.8);
+    --button--shadow-color: rgba(46, 84, 253, 0.8);
     --button-text--text-color: var(--color--primary);
     --button-text--hover--bg-color: var(--color--primary-l3);
     --button-text--active--bg-color: var(--color--primary-l3);
