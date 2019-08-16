@@ -36,15 +36,16 @@ export default {
     mounted () {
         const f = debounce(() => {this.updatePosition()}, 100)
         this.f = f
-        
         let {resizeContainer, scrollContainer} = this
-        if (resizeContainer) {
-            resizeContainer.addEventListener("resize", f)
-            this.rc = resizeContainer
+        if (resizeContainer.length) {
+            let rc = document.querySelector(resizeContainer)
+            rc && rc.addEventListener("resize", f)
+            this.rc = rc
         }
-        if (scrollContainer) {
-            scrollContainer.addEventListener("scroll", f)
-            this.sc = scrollContainer
+        if (scrollContainer.length) {
+            let sc = document.querySelector(scrollContainer)
+            sc && sc.addEventListener("scroll", f)
+            this.sc = sc
         }
         window.addEventListener("resize", f)
         window.addEventListener("scroll", f)
