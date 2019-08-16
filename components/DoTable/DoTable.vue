@@ -28,6 +28,7 @@
                         />
                     </td>
                     <td v-for="(k, i) in columns" 
+                        :align="item.align || 'left'"
                         :key="`col-${i}`" 
                         class="table-cel">
                         {{ typeof k.format === 'function' ? k.format(item) : item[k.name] }}
@@ -88,7 +89,7 @@ export default {
     methods: {
         select (idx, item) {
             let {selection, selected} = this
-            let uncheck = [...selected].find(el => el.item === item)
+            let uncheck = Array.isArray(selected) ? selected.find(el => el.item === item) : false
             let el = this.$el.querySelector(`.table-row[row="${idx}"]`)
             if (uncheck) {
                 // remove from selected
@@ -98,7 +99,7 @@ export default {
             } else {
                 // append to selected
                 let obj = {el, item}
-                let value = selection === 'multiple' ? [...selected, obj] : [obj]
+                let value = selection === 'multiple' ? [...selected || [], obj] : [obj]
                 this.$emit('select', value)
             }
         },
