@@ -1,7 +1,7 @@
 <template>
     <table class="do-table">
         <slot name="head">
-            <thead>
+            <thead :sticky="sticky">
                 <th v-if="selection !== 'none'"/>
                 <th v-for="(item, index) in columns" 
                     :key="`th-${index}`"
@@ -28,7 +28,7 @@
                         />
                     </td>
                     <td v-for="(k, i) in columns" 
-                        :align="item.align || 'left'"
+                        :align="k.align || 'left'"
                         :key="`col-${i}`" 
                         class="table-cel">
                         {{ typeof k.format === 'function' ? k.format(item) : item[k.name] }}
@@ -63,10 +63,8 @@ export default {
             default: 'single',
             validator: v => ['none','single', 'multiple'].includes(v)
         },
-        maxWidth: {
-            type: String,
-            default: ''
-        }
+        maxWidth: {type: String,default: ''},
+        sticky: { type: Boolean, default: true}
     },
     model: {
         prop: 'selected',
@@ -134,6 +132,11 @@ export default {
     --checkbox--hover--bg-color: var(--color--grey);
     --checkbox--checked--bg-color: white;
     --checkbox--icon-color: var(--table--selected--bg-color, var(--color--primary));
+}
+.do-table thead[sticky] th {
+    position: sticky;
+    top: 0;
+    background: var(--table--header--bg-color, var(--bg-color));
 }
 .do-table th {
     padding: var(--padding-s);
