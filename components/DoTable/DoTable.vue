@@ -30,7 +30,7 @@
                     <td v-for="(k, i) in columns" 
                         :key="`col-${i}`" 
                         class="table-cel">
-                        {{ item[k.name] }}
+                        {{ typeof k.format === 'function' ? k.format(item) : item[k.name] }}
                     </td>
                 </tr>
             </tbody>
@@ -77,7 +77,10 @@ export default {
         }
     },
     computed: {
-        selectedItems () { return [...this.selected].map(i => i.item) }
+        selectedItems () {
+            let {selected} = this
+            return Array.isArray(selected) ? [...selected].map(i => i.item) : []
+        }
     },
     mounted () {
         this.updateColumns()
