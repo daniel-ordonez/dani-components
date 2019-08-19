@@ -39,7 +39,7 @@ import DoInputTextBase from './DoInputTextBase'
 .do-input {
     display: flex;
     flex-direction: column;
-    --input--height: calc(1em + (var(--padding-s) * 2));
+    --input--fallback--height: 2.5em;
 }
 .do-input[focus] .input-label{
     color: var(--input--focus--label-color, var(--color--primary));
@@ -59,7 +59,7 @@ import DoInputTextBase from './DoInputTextBase'
     padding: 0;
 }
 .input-prepend:not(:empty), .input-append:not(:empty) {
-    min-width: var(--input--height);
+    min-width: var(--input--height, var(--input--fallback--height));
 }
 .do-input-text {
     border-radius: var(--input--border-radius);
@@ -70,8 +70,8 @@ import DoInputTextBase from './DoInputTextBase'
     flex-wrap: nowrap;
     align-items: center;
     overflow: hidden;
-    --button--mono--size: var(--input--height);
-    min-height: var(--input--height);
+    --button--mono--size: var(--input--height, var(--input--fallback--height));
+    min-height: var(--input--height, var(--input--fallback--height));
 }
 .do-input.round>.do-input-text {
     border-radius: calc( 1em + var(--padding-s) );

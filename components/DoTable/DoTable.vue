@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import DoCheckbox from '@daniel-ordonez/do-checkbox/DoCheckbox'
+import DoCheckbox from '@daniel-ordonez/do-ui/DoCheckbox'
 export default {
     name: 'do-table',
     components: {DoCheckbox},

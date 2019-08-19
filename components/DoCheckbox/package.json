@@ -1,8 +1,0 @@
-{
-    "name": "@daniel-ordonez/do-checkbox",
-    "version": "0.0.5",
-    "publishConfig": {
-        "access": "public"
-    },
-    "gitHead": "461e0d862d9c5ec649a0d5333cddf4eba8b2a26b"
-}
