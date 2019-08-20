@@ -1,5 +1,5 @@
 <template>
-    <a class="do-list-item" @click="event => $emit('click', event)">
+    <a class="do-list-item" @click="event => $emit('click', event)" :clickable="clickable">
         <div class="list-item-avatar">
             <slot name="avatar"/>
         </div>
@@ -14,7 +14,10 @@
 
 <script>
 export default {
-    name: 'do-list-item'
+    name: 'do-list-item',
+    props: {
+        clickable: { type: Boolean, default: false }
+    }
 }
 </script>
 
@@ -24,10 +27,9 @@ export default {
     padding: var(--padding-s);
     background-color: var(--litem--bg-color, var(--bg-color));
 }
-.do-list-item:hover {
-    display: flex;
-    padding: var(--padding-s);
+.do-list-item[clickable]:hover {
     background-color: var(--litem--hover--bg-color, var(--bg-color));
+    cursor: pointer;
 }
 .do-list-item>.list-item-content {
     flex-grow: 1;
