@@ -1,5 +1,5 @@
 <template>
-    <a class="do-list-item" @click="event => $emit('click', event)" :clickable="clickable">
+    <div class="do-list-item" @click="event => $emit('click', event)" :clickable="clickable">
         <div class="list-item-avatar">
             <slot name="avatar"/>
         </div>
@@ -9,7 +9,7 @@
         <div class="list-item-side">
             <slot name="side"/>
         </div>
-    </a>
+    </div>
 </template>
 
 <script>
