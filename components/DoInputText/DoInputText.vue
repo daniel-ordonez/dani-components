@@ -1,7 +1,7 @@
 <template>
     <label :for="inputId" class="do-input" :focus="focused">
         <div class="input-label">
-            {{label}}
+            <small>{{label}}</small>
         </div>
         <div class="do-input-text">
             <div class="input-prepend">
@@ -47,7 +47,6 @@ import DoInputTextBase from './DoInputTextBase'
 .input-label {
     line-height: 1;
     margin-bottom: calc( var(--padding-s) / 2);
-    font-size: var(--text-size-s);
 }
 .input-append, .input-prepend {
     display: flex;

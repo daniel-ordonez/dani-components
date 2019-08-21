@@ -27,7 +27,6 @@ export default {
     white-space: nowrap;
     display: flex;
     align-items: center;
-    font-weight: bold;
     font-size: var(--text-size-l, 1em);
 }
 .card-content {
