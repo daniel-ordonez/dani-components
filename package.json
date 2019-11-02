@@ -1,25 +1,24 @@
 {
-  "name": "root",
+  "name": "do-components",
   "private": true,
   "devDependencies": {
-    "@babel/core": "^7.4.5",
-    "@storybook/addon-actions": "^5.0.11",
-    "@storybook/addon-links": "^5.0.11",
-    "@storybook/addons": "^5.0.11",
-    "@storybook/vue": "^5.0.11",
+    "@babel/core": "^7.6.4",
+    "@storybook/addon-actions": "^5.2.5",
+    "@storybook/addon-links": "^5.2.5",
+    "@storybook/addons": "^5.2.5",
+    "@storybook/vue": "^5.2.5",
     "babel-loader": "^8.0.6",
     "babel-preset-vue": "^2.0.2",
-    "lerna": "^3.14.1",
+    "lerna": "^3.18.3",
     "resize-observer-polyfill": "^1.5.1",
-    "vue-loader": "^15.7.0",
+    "vue-loader": "^15.7.2",
     "vue-template-compiler": "^2.6.10"
   },
   "dependencies": {
-    "boxicons": "^2.0.2",
-    "cloudinary-core": "^2.6.3",
+    "boxicons": "^2.0.4",
     "lodash.debounce": "^4.0.8",
     "lodash.throttle": "^4.1.1",
-    "luxon": "^1.15.0",
+    "luxon": "^1.21.0",
     "vue": "^2.6.10"
   },
   "scripts": {

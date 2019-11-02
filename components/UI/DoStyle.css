@@ -1,5 +1,6 @@
-@import url('https://fonts.googleapis.com/css?family=Rubik:300,400,900&display=swap');
+
 /*
+@import url('https://fonts.googleapis.com/css?family=Rubik:300,400,900&display=swap');
 @import url('https://unicons.iconscout.com/release/v0.0.4/css/unicons.css');
 */
 @import url('https://cdn.jsdelivr.net/npm/boxicons@2.0.2/css/boxicons.min.css');
@@ -43,9 +44,6 @@ img.responsive {
     margin:auto;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    margin-bottom: var(--padding-s);
-}
 
 /*
 PADDING
